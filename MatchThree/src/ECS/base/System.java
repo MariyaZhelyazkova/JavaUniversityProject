@@ -1,7 +1,7 @@
 package ECS.base;
 
 import java.util.HashMap;
-import java.util.List;
+import java.util.ArrayList;
 
 public class System {
 
@@ -12,7 +12,7 @@ public class System {
     }
 
     private final int id;
-    private final List<ComponentType> requiredComponents;
+    private final ArrayList<ComponentType> requiredComponents;
     private final SystemType systemType;
     private HashMap<ComponentType, Component> components;
 
@@ -20,7 +20,7 @@ public class System {
         return id;
     }
 
-    public List<ComponentType> getRequiredComponents() {
+    public ArrayList<ComponentType> getRequiredComponents() {
         return requiredComponents;
     }
 
@@ -28,7 +28,11 @@ public class System {
         return systemType;
     }
 
-    public System(SystemType systemType, List<ComponentType> requiredComponents) throws Exception {
+    public Component getComponent(ComponentType ct) {
+        return components.get(ct);
+    }
+
+    public System(SystemType systemType, ArrayList<ComponentType> requiredComponents) throws Exception {
         if (systemType == null) throw new Exception("System type unspecified");
 
         this.id = getNextId();
