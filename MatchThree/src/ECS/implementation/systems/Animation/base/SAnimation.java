@@ -1,9 +1,9 @@
-package ECS.SystemImpl.Animation.base;
+package ECS.implementation.systems.Animation.base;
 
-import ECS.ComponentImpl.CScreenPosition;
-import ECS.base.ComponentType;
+import ECS.implementation.components.CScreenPosition;
+import ECS.base.types.ComponentType;
 import ECS.base.System;
-import ECS.base.SystemType;
+import ECS.base.types.SystemType;
 import com.sun.javafx.geom.Vec2d;
 
 import java.util.ArrayList;

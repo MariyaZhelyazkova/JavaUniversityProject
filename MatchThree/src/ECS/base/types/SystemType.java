@@ -1,4 +1,4 @@
-package ECS.base;
+package ECS.base.types;
 
 public enum SystemType {
     Animation,

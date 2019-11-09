@@ -1,7 +1,7 @@
-package ECS.ComponentImpl;
+package ECS.implementation.components;
 
 import ECS.base.Component;
-import ECS.base.ComponentType;
+import ECS.base.types.ComponentType;
 
 public class CPosition extends Component {
     private int x, y;

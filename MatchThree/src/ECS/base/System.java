@@ -1,5 +1,8 @@
 package ECS.base;
 
+import ECS.base.types.ComponentType;
+import ECS.base.types.SystemType;
+
 import java.util.HashMap;
 import java.util.ArrayList;
 

@@ -1,5 +1,7 @@
 package ECS.base;
 
+import ECS.base.types.ComponentType;
+
 public class Component {
 
     private static int componentId = 0;

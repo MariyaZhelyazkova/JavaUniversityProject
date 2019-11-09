@@ -1,5 +1,7 @@
 package ECS.base;
 
+import ECS.base.types.ComponentType;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,15 +15,11 @@ public class Entity {
 
     private final int id;
     private HashMap<ComponentType, Component> components;
-    private HashMap<SystemType, System> systems;
 
     public int getId() {
         return id;
     }
 
-    public HashMap<SystemType, System> getSystems() {
-        return systems;
-    }
 
     public Map<ComponentType, Component> getComponents() {
         return components;
@@ -29,8 +27,7 @@ public class Entity {
 
     public Entity(){
         this.id = getNextId();
-        components = new HashMap<ComponentType, Component>();
-        systems = new HashMap<SystemType, System>();
+        components = new HashMap<>();
     }
 
     public void registerComponent(Component c) throws Exception {
@@ -46,30 +43,5 @@ public class Entity {
             throw new Exception("Component not registered");
 
         components.remove(c.getComponentType());
-    }
-
-    public void registerSystem(System s) throws Exception {
-        if (systems != null) {
-            if (systems.get(s.getSystemType()) != null) throw new Exception("System already registered");
-
-            if (s.hasRequiredComponents()) {
-                for (ComponentType ct : s.getRequiredComponents()){
-                    if (components.get(ct) != null){
-                        s.addComponent(components.get(ct));
-                    } else {
-                        throw new Exception("No Component found");
-                    }
-                }
-            }
-        }
-
-        systems.put(s.getSystemType(), s);
-    }
-
-    public void unregisterSystem(System s) throws Exception {
-        if ((systems == null) || (systems.get(s.getSystemType()) == null))
-            throw new Exception("System not registered");
-
-        systems.remove(s.getSystemType());
     }
 }

@@ -1,7 +1,6 @@
-package ECS.SystemImpl.Animation;
+package ECS.implementation.systems.Animation;
 
-import ECS.SystemImpl.Animation.base.AnimationType;
-import ECS.SystemImpl.Animation.base.SAnimation;
+import ECS.implementation.systems.Animation.base.SAnimation;
 
 import java.util.ArrayList;
 import java.util.HashMap;

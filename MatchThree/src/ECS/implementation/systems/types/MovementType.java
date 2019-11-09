@@ -1,4 +1,4 @@
-package ECS;
+package ECS.implementation.systems.types;
 
 public enum MovementType {
     None,

@@ -1,10 +1,10 @@
-package ECS.SystemImpl;
+package ECS.implementation.systems;
 
-import ECS.ComponentImpl.CPosition;
-import ECS.MovementType;
-import ECS.base.ComponentType;
+import ECS.implementation.components.CPosition;
+import ECS.base.types.ComponentType;
 import ECS.base.System;
-import ECS.base.SystemType;
+import ECS.base.types.SystemType;
+import ECS.implementation.systems.types.MovementType;
 
 import java.util.ArrayList;
 

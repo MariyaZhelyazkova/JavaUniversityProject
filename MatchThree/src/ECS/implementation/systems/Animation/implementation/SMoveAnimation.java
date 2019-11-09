@@ -1,9 +1,9 @@
-package ECS.SystemImpl.Animation.AnimationImpl;
+package ECS.implementation.systems.Animation.implementation;
 
-import ECS.MovementType;
-import ECS.SystemImpl.Animation.base.AnimationType;
-import ECS.SystemImpl.Animation.base.SAnimation;
-import ECS.base.SystemType;
+import ECS.implementation.systems.types.MovementType;
+import ECS.implementation.systems.Animation.base.AnimationType;
+import ECS.implementation.systems.Animation.base.SAnimation;
+import ECS.base.types.SystemType;
 
 public class SMoveAnimation extends SAnimation {
 
