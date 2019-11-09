@@ -11,12 +11,12 @@ public class SMoveAnimation extends SAnimation {
     private int steps = 0;
 
     private void setMovementType(){
-        int startDiff = getStartPosition().getKey() - getEndPosition().getKey();
-        int endDiff = getStartPosition().getValue() - getEndPosition().getValue();
+        double startDiff = getStartPosition().x - getEndPosition().x;
+        double endDiff = getStartPosition().y - getEndPosition().y;
 
         if (startDiff != 0)
         {
-            steps = Math.abs(startDiff);
+            steps = Math.abs((int)startDiff);
 
             if(startDiff < 0)
                 movementType = MovementType.Left;
@@ -28,7 +28,7 @@ public class SMoveAnimation extends SAnimation {
             else
                 movementType = MovementType.Down;
 
-            steps = endDiff;
+            steps = (int)endDiff;
             if (steps > 1) movementType = MovementType.Fall;
 
         } else {
