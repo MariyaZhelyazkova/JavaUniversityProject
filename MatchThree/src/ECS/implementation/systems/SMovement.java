@@ -1,39 +1,53 @@
 package ECS.implementation.systems;
 
-import ECS.implementation.components.CPosition;
+import ECS.base.interfaceses.ISystem;
 import ECS.base.types.ComponentType;
-import ECS.base.System;
 import ECS.base.types.SystemType;
 import ECS.implementation.systems.types.MovementType;
+import events.base.IEvent;
+import events.base.IEventListener;
+import events.implementation.instructions.MoveInstruction;
+import events.types.EventType;
 
-import java.util.ArrayList;
+import java.util.Vector;
 
-public class SMovement extends System {
-    public SMovement(SystemType systemType, ArrayList<ComponentType> requiredComponents) throws Exception {
-        super(SystemType.Movement, new ArrayList<ComponentType>() {{add(ComponentType.Position);}});
+public class SMovement implements ISystem, IEventListener {
+    private final SystemType systemType = SystemType.Movement;
+    private final Vector<ComponentType> requiredComponents;
+
+    public SMovement() throws Exception {
+        requiredComponents = new Vector<ComponentType>(){{add(ComponentType.Position);}};
     }
 
     public void Move(MovementType movementType){
-        Move(movementType, 1);
+        //TO DO
     }
 
     public void Move(MovementType movementType, int steps){
-        CPosition pos = (CPosition) getComponent(ComponentType.Position);
+        // TO DO
+    }
 
-        switch (movementType){
-            case Up:
-                pos.setY(pos.getY() + steps);
-                break;
-            case Down:
-            case Fall:
-                pos.setY(pos.getY() - steps);
-                break;
-            case Left:
-                pos.setX(pos.getX() - steps);
-                break;
-            case Right:
-                pos.setX(pos.getX() + steps);
-                break;
-        }
+    @Override
+    public SystemType getSystemType() {
+        return systemType;
+    }
+
+    @Override
+    public Vector<ComponentType> getRequiredComponents() {
+        return requiredComponents;
+    }
+
+    @Override
+    public void onEvent(IEvent e) {
+        if (e.getEventType() != EventType.Move)
+            return;
+
+        MoveInstruction mi = (MoveInstruction) e.getEventInstruction();
+        System.out.println(mi.toString());
+    }
+
+    @Override
+    public Integer getId() {
+        return null;
     }
 }

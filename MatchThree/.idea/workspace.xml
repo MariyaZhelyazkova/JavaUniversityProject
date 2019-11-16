@@ -46,6 +46,26 @@
       </list>
     </option>
   </component>
+  <component name="RunManager">
+    <configuration name="MatchThree" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="sandbox.MatchThree" />
+      <module name="MatchThree" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="sandbox.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MatchThree" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -59,7 +79,8 @@
       <workItem from="1572600088904" duration="6312000" />
       <workItem from="1572615559729" duration="7964000" />
       <workItem from="1573305393351" duration="368000" />
-      <workItem from="1573305994520" duration="3914000" />
+      <workItem from="1573305994520" duration="6794000" />
+      <workItem from="1573907158853" duration="8878000" />
     </task>
     <servers />
   </component>

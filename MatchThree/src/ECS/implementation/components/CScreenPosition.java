@@ -1,9 +1,10 @@
 package ECS.implementation.components;
 
-import ECS.base.Component;
+import ECS.base.interfaceses.IComponent;
 import ECS.base.types.ComponentType;
 
-public class CScreenPosition extends Component {
+public class CScreenPosition implements IComponent {
+    private final ComponentType componentType = ComponentType.ScreenPosition;
     private int x, y;
 
     public int getX() {
@@ -23,8 +24,12 @@ public class CScreenPosition extends Component {
     }
 
     public CScreenPosition(int x, int y) {
-        super(ComponentType.ScreenPosition);
         this.x = x;
         this.y = y;
+    }
+
+    @Override
+    public ComponentType getComponentType() {
+        return componentType;
     }
 }

@@ -1,9 +1,11 @@
 package ECS.implementation.components;
 
-import ECS.base.Component;
+import ECS.base.interfaceses.IComponent;
 import ECS.base.types.ComponentType;
 
-public class CPosition extends Component {
+public class CPosition implements IComponent {
+    private final ComponentType componentType = ComponentType.Position;
+
     private int x, y;
 
     public int getX() {
@@ -23,8 +25,12 @@ public class CPosition extends Component {
     }
 
     public CPosition(int x, int y) {
-        super(ComponentType.Position);
         this.x = x;
         this.y = y;
+    }
+
+    @Override
+    public ComponentType getComponentType() {
+        return componentType;
     }
 }
