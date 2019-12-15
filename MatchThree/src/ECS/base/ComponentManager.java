@@ -16,6 +16,18 @@ public class ComponentManager implements IComponentManager {
         components = new HashMap<>();
     }
 
+    public Vector<ComponentType> getComponentsType(IEntity entity){
+        Vector<ComponentType> componentTypes = new Vector<>();
+
+        components.get(entity).forEach((c) -> componentTypes.add(c.getComponentType()));
+
+        return componentTypes;
+    }
+
+    public HashMap<IEntity, Vector<IComponent>> getComponents() {
+        return components;
+    }
+
     @Override
     public void registerEntity(IEntity entity) {
         components.computeIfAbsent(entity, k -> new Vector<IComponent>());
@@ -64,5 +76,15 @@ public class ComponentManager implements IComponentManager {
     @Override
     public Vector<IComponent> getComponent(IEntity entity) {
         return components.get(entity);
+    }
+
+    public boolean entityHasComponents(IEntity entity, Vector<ComponentType> reqComponents){
+        Vector<ComponentType> componentTypes = getComponentsType(entity);
+        for (ComponentType ct : reqComponents) {
+            if (!componentTypes.contains(ct))
+                return false;
+        }
+
+        return true;
     }
 }
