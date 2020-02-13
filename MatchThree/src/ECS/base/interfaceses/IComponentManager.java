@@ -19,4 +19,6 @@ public interface IComponentManager {
     Vector<IComponent> getComponent(ComponentType componentType);
 
     Vector<IComponent> getComponent(IEntity entity);
+
+    IEntity getEntity(IComponent iComponent);
 }

@@ -1,5 +1,7 @@
 package sandbox;
 
+import com.sun.tools.javac.Main;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -26,26 +28,8 @@ public class MatchThree extends JFrame {
             MatchThree ex = new MatchThree();
             ex.setVisible(true);
 
-            ex.board.repaint();
-        });
+            ex.board.startGame();
 
-//        ComponentManager componentManager = new ComponentManager();
-//        TestEntity t1 = new TestEntity(componentManager);
-//        TestEntity t2 = new TestEntity(componentManager);
-//
-//        EventDispatcher eventDispatcher = new EventDispatcher();
-//        try {
-//            SMovement sMovement = new SMovement();
-//            eventDispatcher.subscribe(EventType.Move, sMovement);
-//        } catch (Exception e){
-//            System.out.println(e.getMessage());
-//        }
-//
-//        eventDispatcher.publish(new MoveEvent(t1, 2, 2));
-//        eventDispatcher.publish(new MoveEvent(t2, 3, 3));
-//
-//        while (true) {
-//            eventDispatcher.dispatchEvent();
-//        }
+        });
     }
 }

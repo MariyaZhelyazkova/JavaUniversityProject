@@ -26,7 +26,7 @@ public class SRenderer implements ISystem {
     }
 
     public void draw(Graphics graphics, CScreenPosition cScreenPosition, CTexture cTexture){
-        graphics.drawImage(cTexture.getTexture(), cScreenPosition.getY(), cScreenPosition.getX(), panel);
+        graphics.drawImage(cTexture.getTexture(), cScreenPosition.getX(), cScreenPosition.getY(), panel);
     }
 
     @Override

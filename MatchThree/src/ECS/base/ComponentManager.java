@@ -78,6 +78,16 @@ public class ComponentManager implements IComponentManager {
         return components.get(entity);
     }
 
+    @Override
+    public IEntity getEntity(IComponent iComponent) {
+        for(HashMap.Entry entry : components.entrySet()){
+            if (((Vector<IComponent>) entry.getValue()).contains(iComponent))
+                return (IEntity) entry.getKey();
+        }
+
+        return null;
+    }
+
     public boolean entityHasComponents(IEntity entity, Vector<ComponentType> reqComponents){
         Vector<ComponentType> componentTypes = getComponentsType(entity);
         for (ComponentType ct : reqComponents) {
