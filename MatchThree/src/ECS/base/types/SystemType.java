@@ -4,5 +4,6 @@ public enum SystemType {
     Animation,
     MoveAnimation,
     Movement,
-    Renderer
+    Renderer,
+    Population
 }

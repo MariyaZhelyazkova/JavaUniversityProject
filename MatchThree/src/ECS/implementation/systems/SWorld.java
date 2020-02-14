@@ -42,16 +42,7 @@ public class SWorld implements ISystem, IEventListener {
     }
 
     private void createTileEntity(String tileType, int x, int y){
-        Entity entity = new Entity();
 
-        try {
-            componentManager.registerEntity(entity);
-            componentManager.addComponent(entity, new CPosition(x, y));
-            componentManager.addComponent(entity, new CScreenPosition(x * 64, y * 64));
-            componentManager.addComponent(entity, new CTexture(tileType));
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-        }
     }
 
     @Override

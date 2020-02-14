@@ -41,7 +41,7 @@ public class EventDispatcher implements IEventDispatcher {
 
         events.forEach((event -> {
             Vector<IEventListener> currListeners = listeners.get(event.getEventType());
-            if (!currListeners.isEmpty())
+            if (currListeners != null)
                 for (IEventListener listener : currListeners) {
                     listener.onEvent(event);
                     if (event.isHandled())
