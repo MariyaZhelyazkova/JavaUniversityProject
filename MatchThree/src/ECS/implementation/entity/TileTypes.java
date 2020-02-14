@@ -1,4 +1,4 @@
-package sandbox;
+package ECS.implementation.entity;
 
 import java.util.Vector;
 

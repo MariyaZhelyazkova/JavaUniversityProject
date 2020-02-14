@@ -4,6 +4,11 @@ import ECS.base.ComponentManager;
 import ECS.base.interfaceses.IComponent;
 import ECS.base.types.ComponentType;
 import ECS.implementation.components.CPosition;
+import ECS.implementation.entity.Tile;
+import ECS.implementation.entity.TileTypes;
+import events.implementation.ClickEvent;
+import events.implementation.CreateTileEntityEvent;
+import events.implementation.EventDispatcher;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
@@ -15,17 +20,18 @@ public class Layer {
     private final int xSize;
     private final int ySize;
     private final ComponentManager componentManager;
+    private final EventDispatcher eventDispatcher;
 
-    public Layer(int xSize, int ySize, ComponentManager componentManager) {
+    public Layer(int xSize, int ySize, ComponentManager componentManager, EventDispatcher eventDispatcher) {
         this.xSize = xSize;
         this.ySize = ySize;
         this.componentManager = componentManager;
+        this.eventDispatcher = eventDispatcher;
 
         Random rand = new Random();
         for (int y = 0; y < ySize; y++)
-            for (int x = 0; x < xSize; x++) {
-                new Tile(this.componentManager, TileTypes.TILE_TYPES.get(rand.nextInt(8)), x, y);
-            }
+            for (int x = 0; x < xSize; x++)
+                eventDispatcher.publish(new CreateTileEntityEvent(TileTypes.TILE_TYPES.get(rand.nextInt(8)), x, y));
     }
 
     public int getXSize() {
@@ -54,21 +60,23 @@ public class Layer {
         xPos = position.x / 64;
         yPos = position.y / 64;
 
-        System.out.println("xPos = " + xPos + ";  yPos = " + yPos);
+        eventDispatcher.publish(new ClickEvent(xPos, yPos));
 
-        Tile tile = findTile(xPos, yPos);
+//        System.out.println("xPos = " + xPos + ";  yPos = " + yPos);
 
-        if (tile != null) {
-            System.out.println(tile.getId());
-            componentManager.unregisterEntity(tile);
-            Random rand = new Random();
-            new Tile(this.componentManager, TileTypes.TILE_TYPES.get(rand.nextInt(8)), xPos, yPos);
-            tile = findTile(xPos, yPos);
-            System.out.println("New Tile created with id = " + tile.getId());
-            return true;
-        } else {
-            System.out.println("Tile not found!!!");
+//        Tile tile = findTile(xPos, yPos);
+
+//        if (tile != null) {
+//            System.out.println(tile.getId());
+//            componentManager.unregisterEntity(tile);
+//            Random rand = new Random();
+//            new Tile(this.componentManager, TileTypes.TILE_TYPES.get(rand.nextInt(8)), xPos, yPos);
+//            tile = findTile(xPos, yPos);
+//            System.out.println("New Tile created with id = " + tile.getId());
+//            return true;
+//        } else {
+//            System.out.println("Tile not found!!!");
             return false;
-        }
+//        }
     }
 }

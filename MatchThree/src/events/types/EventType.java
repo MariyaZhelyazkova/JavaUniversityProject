@@ -2,5 +2,7 @@ package events.types;
 
 public enum EventType {
     EntityDestroyed,
-    Move
+    Move,
+    Click,
+    CreateEntity
 }

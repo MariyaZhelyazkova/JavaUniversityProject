@@ -4,5 +4,5 @@ import events.types.EventType;
 
 public interface IInstructions {
 
-    EventType getRequiredSystemType();
+    EventType getEventType();
 }

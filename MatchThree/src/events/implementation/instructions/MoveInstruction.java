@@ -31,7 +31,7 @@ public class MoveInstruction implements IInstructions {
     }
 
     @Override
-    public EventType getRequiredSystemType() {
+    public EventType getEventType() {
         return eventType;
     }
 }

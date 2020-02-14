@@ -5,6 +5,8 @@ import ECS.base.types.ComponentType;
 import ECS.implementation.components.CScreenPosition;
 import ECS.implementation.components.CTexture;
 import ECS.implementation.systems.SRenderer;
+import events.implementation.EventDispatcher;
+import org.w3c.dom.events.EventException;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +21,7 @@ public class Board extends JPanel {
     private Layer layer;
     private  SRenderer sRenderer;
     private ComponentManager componentManager;
+    private EventDispatcher eventDispatcher;
     private boolean doPaint = false;
 
     public Board(){
@@ -31,18 +34,15 @@ public class Board extends JPanel {
         setDoubleBuffered(true);
         setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
 
-        componentManager = new ComponentManager();
-
         sRenderer = new SRenderer(this);
+    }
 
-        layer = new Layer(8, 4, componentManager);
+    public ComponentManager getComponentManager() {
+        return componentManager;
+    }
 
-        this.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                doPaint = layer.onClick(e);
-            }
-        });
+    public void setComponentManager(ComponentManager componentManager) {
+        this.componentManager = componentManager;
     }
 
     @Override

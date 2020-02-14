@@ -1,4 +1,4 @@
-package sandbox;
+package ECS.implementation.entity;
 
 import ECS.base.ComponentManager;
 import ECS.base.interfaceses.IEntity;

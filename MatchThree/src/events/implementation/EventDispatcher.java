@@ -40,11 +40,13 @@ public class EventDispatcher implements IEventDispatcher {
             return;
 
         events.forEach((event -> {
-            for (IEventListener listener : listeners.get(event.getEventType())) {
-                listener.onEvent(event);
-                if (event.isHandled())
-                    break;
-            }
+            Vector<IEventListener> currListeners = listeners.get(event.getEventType());
+            if (!currListeners.isEmpty())
+                for (IEventListener listener : currListeners) {
+                    listener.onEvent(event);
+                    if (event.isHandled())
+                        break;
+                }
         }));
 
         events.clear();
