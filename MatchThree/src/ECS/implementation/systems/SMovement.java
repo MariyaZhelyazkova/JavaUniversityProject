@@ -13,11 +13,7 @@ import java.util.Vector;
 
 public class SMovement implements ISystem, IEventListener {
     private final SystemType systemType = SystemType.Movement;
-    private final Vector<ComponentType> requiredComponents;
-
-    public SMovement() throws Exception {
-        requiredComponents = new Vector<ComponentType>(){{add(ComponentType.Position);}};
-    }
+    private final Vector<ComponentType> requiredComponents =  new Vector<ComponentType>(){{add(ComponentType.Position);}};
 
     public void Move(MovementType movementType){
         //TO DO

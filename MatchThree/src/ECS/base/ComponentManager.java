@@ -4,11 +4,14 @@ import ECS.base.interfaceses.IComponent;
 import ECS.base.interfaceses.IComponentManager;
 import ECS.base.interfaceses.Entity;
 import ECS.base.types.ComponentType;
+import events.base.IEvent;
+import events.base.IEventListener;
+import events.types.EventType;
 
 import java.util.HashMap;
 import java.util.Vector;
 
-public class ComponentManager implements IComponentManager {
+public class ComponentManager implements IComponentManager, IEventListener {
 
     private HashMap<Entity, Vector<IComponent>> components;
 
@@ -96,5 +99,30 @@ public class ComponentManager implements IComponentManager {
         }
 
         return true;
+    }
+
+    @Override
+    public Vector<IComponent> getComponents(String entityType, ComponentType componentType) {
+        Vector<IComponent> result = new Vector<>();
+
+        components.forEach((key, value) -> {
+            for (IComponent c : value)
+                if (c.getComponentType() == componentType && key.getEntityType().equals(entityType))
+                    result.add(c);
+        });
+
+        return result;
+    }
+
+    @Override
+    public void onEvent(IEvent e) {
+        if (e.getEventType() == EventType.EntityDestroyed){
+            unregisterEntity(e.getEntity());
+        }
+    }
+
+    @Override
+    public Integer getId() {
+        return null;
     }
 }

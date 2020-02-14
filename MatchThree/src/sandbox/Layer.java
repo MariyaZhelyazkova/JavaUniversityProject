@@ -2,6 +2,7 @@ package sandbox;
 
 import ECS.base.ComponentManager;
 import ECS.base.interfaceses.Entity;
+import ECS.base.types.EntityType;
 import ECS.implementation.components.BoardComponent;
 import events.implementation.ClickEvent;
 import events.implementation.EventDispatcher;
@@ -17,6 +18,8 @@ public class Layer extends Entity {
     private final int paddingLeft;
 
     public Layer(int xSize, int ySize, int paddingTop, int paddingLeft, EventDispatcher eventDispatcher, ComponentManager componentManager) {
+        super(EntityType.STATIC_ENTITY);
+
         this.eventDispatcher = eventDispatcher;
         this.paddingLeft = paddingLeft;
         this.paddingTop = paddingTop;

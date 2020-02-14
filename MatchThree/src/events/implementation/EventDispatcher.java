@@ -39,7 +39,10 @@ public class EventDispatcher implements IEventDispatcher {
         if (events.isEmpty())
             return;
 
-        events.forEach((event -> {
+        Vector<IEvent> eventsQueue = new Vector<>(events);
+        events.clear();
+
+        eventsQueue.forEach((event -> {
             Vector<IEventListener> currListeners = listeners.get(event.getEventType());
             if (currListeners != null)
                 for (IEventListener listener : currListeners) {
@@ -49,6 +52,6 @@ public class EventDispatcher implements IEventDispatcher {
                 }
         }));
 
-        events.clear();
+        eventsQueue.clear();
     }
 }

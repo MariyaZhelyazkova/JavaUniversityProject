@@ -27,6 +27,7 @@ public class PopulatingSystem implements ISystem, IEventListener {
     }};
     private final EventDispatcher eventDispatcher;
     private final ComponentManager componentManager;
+    private BoardComponent boardComponent;
 
     public PopulatingSystem(EventDispatcher eventDispatcher, ComponentManager componentManager) {
         this.eventDispatcher = eventDispatcher;
@@ -34,7 +35,7 @@ public class PopulatingSystem implements ISystem, IEventListener {
     }
 
     private void createEntityAt(int xPos, int yPos, String tileType, BoardComponent boardComponent) {
-        Entity entity = new Entity();
+        Entity entity = new Entity(tileType);
 
         try {
             componentManager.registerEntity(entity);
@@ -49,10 +50,11 @@ public class PopulatingSystem implements ISystem, IEventListener {
     }
 
     private void initPopulation(BoardComponent boardComponent){
+        this.boardComponent = boardComponent;
         Random rand = new Random();
         for (int y = 0; y < boardComponent.getySize(); y++)
             for (int x = 0; x < boardComponent.getXSize(); x++)
-                createEntityAt(x, y, TileTypes.TILE_TYPES.get(rand.nextInt(8)), boardComponent);
+                createEntityAt(x, y, TileTypes.TILE_TYPES.get(rand.nextInt(6)), boardComponent);
     }
 
     @Override
@@ -70,6 +72,11 @@ public class PopulatingSystem implements ISystem, IEventListener {
         if (e.getEventType() == EventType.InitPopulation) {
             Layer layer = (Layer) e.getEntity();
             initPopulation((BoardComponent) componentManager.getComponent(layer, ComponentType.Board));
+        } else if (e.getEventType() == EventType.CreateEntity){
+            System.out.println("In creation");
+            Random rand = new Random();
+            CreateTileEntityEvent event = (CreateTileEntityEvent) e;
+            createEntityAt(event.getxPos(), event.getyPos(), TileTypes.TILE_TYPES.get(rand.nextInt(6)), boardComponent);
         }
     }
 

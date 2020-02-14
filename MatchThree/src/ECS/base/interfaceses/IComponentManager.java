@@ -21,4 +21,6 @@ public interface IComponentManager {
     Vector<IComponent> getComponent(Entity entity);
 
     Entity getEntity(IComponent iComponent);
+
+    Vector<IComponent> getComponents(String entityType, ComponentType componentType);
 }

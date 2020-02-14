@@ -52,20 +52,6 @@ public class SWorld implements ISystem, IEventListener {
 
     @Override
     public void onEvent(IEvent e) {
-        switch (e.getEventType()){
-            case Click:
-                ClickEvent clickEvent = (ClickEvent)e;
-                Entity entity = findEntityAtPos(clickEvent.getxPos(),clickEvent.getyPos() );
-                if (entity != null)
-                    System.out.println("Entity found at xPos = " + clickEvent.getxPos() + ";  yPos = " + clickEvent.getyPos());
-                break;
-            case CreateEntity:
-                CreateTileEntityEvent event = (CreateTileEntityEvent) e;
-                createTileEntity(event.getTileType(), event.getxPos(), event.getyPos());
-                ((CreateTileEntityEvent) e).setHandled(true);
-                break;
-            default: System.out.println("Nothing happened");
-        }
 
     }
 

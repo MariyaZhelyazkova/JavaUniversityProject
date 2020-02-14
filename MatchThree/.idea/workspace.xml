@@ -2,20 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0ad6260b-1906-4e59-bf01-f2236c9faa0c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/ECS/base/types/EntityType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ECS/implementation/systems/AnimationSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/ECS/implementation/systems/MatchingSystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/events/implementation/EntityDestroyedEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ECS/base/ComponentManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/base/ComponentManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ECS/base/interfaceses/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/base/interfaceses/Entity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ECS/base/interfaceses/IComponentManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/base/interfaceses/IComponentManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/base/interfaceses/IEntity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/base/interfaceses/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/implementation/entity/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/implementation/entity/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/implementation/entity/Tile.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ECS/base/types/SystemType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/base/types/SystemType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ECS/implementation/entity/TileTypes.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/implementation/entity/TileTypes.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ECS/implementation/systems/PopulatingSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/implementation/systems/PopulatingSystem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ECS/implementation/systems/SMovement.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/implementation/systems/SMovement.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ECS/implementation/systems/SWorld.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/implementation/systems/SWorld.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/base/IEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/base/IEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/implementation/ClickEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/implementation/ClickEvent.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/implementation/CreateTileEntityEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/implementation/CreateTileEntityEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/implementation/InitPopulationEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/implementation/InitPopulationEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/implementation/EventDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/implementation/EventDispatcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/events/implementation/MoveEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/implementation/MoveEvent.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/events/implementation/instructions/MoveInstruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/implementation/instructions/MoveInstruction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sandbox/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sandbox/Layer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sandbox/MainThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sandbox/MainThread.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,8 +30,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Enum" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="Class" />
       </list>
     </option>
@@ -108,7 +113,7 @@
       <workItem from="1577441922094" duration="228000" />
       <workItem from="1581536545876" duration="1519000" />
       <workItem from="1581617280223" duration="4753000" />
-      <workItem from="1581663982229" duration="12119000" />
+      <workItem from="1581663982229" duration="23903000" />
     </task>
     <servers />
   </component>
@@ -129,10 +134,10 @@
     </option>
   </component>
   <component name="WindowStateProjectService">
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1581692024121">
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser" timestamp="1581716543342">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1581692024121" />
+    <state x="765" y="229" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040@0.0.1920.1040" timestamp="1581716543342" />
     <state x="808" y="408" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1576423437424">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -149,22 +154,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="740" y="274" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1576956720328" />
-    <state width="938" height="282" key="GridCell.Tab.0.bottom" timestamp="1581706556398">
+    <state width="938" height="282" key="GridCell.Tab.0.bottom" timestamp="1581720996658">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581706556398" />
-    <state width="938" height="282" key="GridCell.Tab.0.center" timestamp="1581706556398">
+    <state width="938" height="282" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1581720996658" />
+    <state width="938" height="282" key="GridCell.Tab.0.center" timestamp="1581720996658">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581706556398" />
-    <state width="938" height="282" key="GridCell.Tab.0.left" timestamp="1581706556398">
+    <state width="938" height="282" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1581720996658" />
+    <state width="938" height="282" key="GridCell.Tab.0.left" timestamp="1581720996657">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581706556398" />
-    <state width="938" height="282" key="GridCell.Tab.0.right" timestamp="1581706556398">
+    <state width="938" height="282" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1581720996657" />
+    <state width="938" height="282" key="GridCell.Tab.0.right" timestamp="1581720996658">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="938" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581706556398" />
+    <state width="938" height="282" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1581720996658" />
     <state width="938" height="348" key="GridCell.Tab.1.bottom" timestamp="1581667663682">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -189,10 +194,14 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="656" y="345" key="com.intellij.ide.util.TipDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1581663982488" />
-    <state x="656" y="252" width="607" height="536" key="find.popup" timestamp="1581620895760">
+    <state x="656" y="252" width="607" height="536" key="find.popup" timestamp="1581720675395">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="656" y="252" width="607" height="536" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1581620895760" />
+    <state x="656" y="252" width="607" height="536" key="find.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1581720675395" />
+    <state x="616" y="240" key="run.anything.popup" timestamp="1581715715884">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state x="616" y="240" key="run.anything.popup/0.0.1920.1040@0.0.1920.1040" timestamp="1581715715884" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1576424109460">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>

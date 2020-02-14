@@ -1,16 +1,17 @@
 package events.implementation.instructions;
 
-import events.base.IInstructions;
 import events.types.EventType;
 
-public class MoveInstruction implements IInstructions {
+public class MoveInstruction {
 
     private final EventType eventType = EventType.Move;
-    private int x, y;
+    private int x, y, step;
+    private boolean finished = false;
 
-    public MoveInstruction(int x, int y){
+    public MoveInstruction(int x, int y, int step) {
         this.x = x;
         this.y = y;
+        this.step = step;
     }
 
     public int getX() {
@@ -21,17 +22,15 @@ public class MoveInstruction implements IInstructions {
         return y;
     }
 
-    @Override
-    public String toString() {
-        return "MoveInstruction{" +
-                "eventType=" + eventType +
-                ", x=" + x +
-                ", y=" + y +
-                '}';
+    public boolean isFinished() {
+        return finished;
     }
 
-    @Override
-    public EventType getEventType() {
-        return eventType;
+    public void setFinished(boolean finished) {
+        this.finished = finished;
+    }
+
+    public int getStep() {
+        return step;
     }
 }
