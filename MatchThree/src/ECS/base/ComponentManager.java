@@ -2,7 +2,7 @@ package ECS.base;
 
 import ECS.base.interfaceses.IComponent;
 import ECS.base.interfaceses.IComponentManager;
-import ECS.base.interfaceses.IEntity;
+import ECS.base.interfaceses.Entity;
 import ECS.base.types.ComponentType;
 
 import java.util.HashMap;
@@ -10,13 +10,13 @@ import java.util.Vector;
 
 public class ComponentManager implements IComponentManager {
 
-    private HashMap<IEntity, Vector<IComponent>> components;
+    private HashMap<Entity, Vector<IComponent>> components;
 
     public ComponentManager(){
         components = new HashMap<>();
     }
 
-    public Vector<ComponentType> getComponentsType(IEntity entity){
+    public Vector<ComponentType> getComponentsType(Entity entity){
         Vector<ComponentType> componentTypes = new Vector<>();
 
         components.get(entity).forEach((c) -> componentTypes.add(c.getComponentType()));
@@ -24,22 +24,22 @@ public class ComponentManager implements IComponentManager {
         return componentTypes;
     }
 
-    public HashMap<IEntity, Vector<IComponent>> getComponents() {
+    public HashMap<Entity, Vector<IComponent>> getComponents() {
         return components;
     }
 
     @Override
-    public void registerEntity(IEntity entity) {
+    public void registerEntity(Entity entity) {
         components.computeIfAbsent(entity, k -> new Vector<IComponent>());
     }
 
     @Override
-    public void unregisterEntity(IEntity entity) {
+    public void unregisterEntity(Entity entity) {
         components.remove(entity);
     }
 
     @Override
-    public void addComponent(IEntity entity, IComponent component) throws Exception {
+    public void addComponent(Entity entity, IComponent component) throws Exception {
         if(!components.containsKey(entity)) throw new Exception("Entity not found");
 
         if (!components.get(entity).contains(component))
@@ -47,12 +47,12 @@ public class ComponentManager implements IComponentManager {
     }
 
     @Override
-    public void RemoveComponent(IEntity entity, IComponent component) {
+    public void RemoveComponent(Entity entity, IComponent component) {
         components.get(entity).remove(component);
     }
 
     @Override
-    public IComponent getComponent(IEntity entity, ComponentType componentType) {
+    public IComponent getComponent(Entity entity, ComponentType componentType) {
         for (IComponent c : components.get(entity))
             if (c.getComponentType() == componentType)
                 return c;
@@ -74,21 +74,21 @@ public class ComponentManager implements IComponentManager {
     }
 
     @Override
-    public Vector<IComponent> getComponent(IEntity entity) {
+    public Vector<IComponent> getComponent(Entity entity) {
         return components.get(entity);
     }
 
     @Override
-    public IEntity getEntity(IComponent iComponent) {
+    public Entity getEntity(IComponent iComponent) {
         for(HashMap.Entry entry : components.entrySet()){
             if (((Vector<IComponent>) entry.getValue()).contains(iComponent))
-                return (IEntity) entry.getKey();
+                return (Entity) entry.getKey();
         }
 
         return null;
     }
 
-    public boolean entityHasComponents(IEntity entity, Vector<ComponentType> reqComponents){
+    public boolean entityHasComponents(Entity entity, Vector<ComponentType> reqComponents){
         Vector<ComponentType> componentTypes = getComponentsType(entity);
         for (ComponentType ct : reqComponents) {
             if (!componentTypes.contains(ct))

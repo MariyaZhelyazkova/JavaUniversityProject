@@ -1,6 +1,6 @@
 package events.implementation;
 
-import ECS.base.interfaceses.IEntity;
+import ECS.base.interfaceses.Entity;
 import events.base.IEvent;
 import events.base.IInstructions;
 import events.types.EventType;
@@ -39,7 +39,7 @@ public class ClickEvent implements IEvent {
     }
 
     @Override
-    public IEntity getEntity() {
+    public Entity getEntity() {
         return null;
     }
 }

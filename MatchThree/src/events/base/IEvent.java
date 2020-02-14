@@ -1,6 +1,6 @@
 package events.base;
 
-import ECS.base.interfaceses.IEntity;
+import ECS.base.interfaceses.Entity;
 import events.types.EventType;
 
 public interface IEvent {
@@ -11,5 +11,5 @@ public interface IEvent {
 
     IInstructions getEventInstruction();
 
-    IEntity getEntity();
+    Entity getEntity();
 }

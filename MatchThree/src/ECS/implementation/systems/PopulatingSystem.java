@@ -8,7 +8,7 @@ import ECS.implementation.components.BoardComponent;
 import ECS.implementation.components.CPosition;
 import ECS.implementation.components.CScreenPosition;
 import ECS.implementation.components.CTexture;
-import ECS.implementation.entity.Entity;
+import ECS.base.interfaceses.Entity;
 import ECS.implementation.entity.TileTypes;
 import events.base.IEvent;
 import events.base.IEventListener;

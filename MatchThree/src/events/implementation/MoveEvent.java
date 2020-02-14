@@ -1,6 +1,6 @@
 package events.implementation;
 
-import ECS.base.interfaceses.IEntity;
+import ECS.base.interfaceses.Entity;
 import events.base.IInstructions;
 import events.base.IEvent;
 import events.implementation.instructions.MoveInstruction;
@@ -10,10 +10,10 @@ public class MoveEvent implements IEvent {
 
     private final EventType eventType = EventType.Move;
     private boolean handled = false;
-    private IEntity entity;
+    private Entity entity;
     private MoveInstruction moveInstruction;
 
-    public MoveEvent(IEntity entity, int x, int y){
+    public MoveEvent(Entity entity, int x, int y){
         this.entity = entity;
         this.moveInstruction = new MoveInstruction(x, y);
     }
@@ -34,7 +34,7 @@ public class MoveEvent implements IEvent {
     }
 
     @Override
-    public IEntity getEntity() {
+    public Entity getEntity() {
         return entity;
     }
 }

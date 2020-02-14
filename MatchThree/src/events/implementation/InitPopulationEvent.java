@@ -1,16 +1,16 @@
 package events.implementation;
 
-import ECS.base.interfaceses.IEntity;
+import ECS.base.interfaceses.Entity;
 import events.base.IEvent;
 import events.base.IInstructions;
 import events.types.EventType;
 
 public class InitPopulationEvent implements IEvent {
-    private final IEntity entity;
+    private final Entity entity;
     private final EventType eventType = EventType.InitPopulation;
     private final boolean handled = false;
 
-    public InitPopulationEvent(IEntity entity) {
+    public InitPopulationEvent(Entity entity) {
         this.entity = entity;
     }
 
@@ -30,7 +30,7 @@ public class InitPopulationEvent implements IEvent {
     }
 
     @Override
-    public IEntity getEntity() {
+    public Entity getEntity() {
         return entity;
     }
 }

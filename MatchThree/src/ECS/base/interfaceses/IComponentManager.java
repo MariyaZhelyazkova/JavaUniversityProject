@@ -6,19 +6,19 @@ import java.util.Vector;
 
 public interface IComponentManager {
 
-    void registerEntity(IEntity entity);
+    void registerEntity(Entity entity);
 
-    void unregisterEntity(IEntity entity);
+    void unregisterEntity(Entity entity);
 
-    void addComponent(IEntity entity, IComponent component) throws Exception;
+    void addComponent(Entity entity, IComponent component) throws Exception;
 
-    void RemoveComponent(IEntity entity, IComponent component);
+    void RemoveComponent(Entity entity, IComponent component);
 
-    IComponent getComponent(IEntity entity, ComponentType componentType);
+    IComponent getComponent(Entity entity, ComponentType componentType);
 
     Vector<IComponent> getComponent(ComponentType componentType);
 
-    Vector<IComponent> getComponent(IEntity entity);
+    Vector<IComponent> getComponent(Entity entity);
 
-    IEntity getEntity(IComponent iComponent);
+    Entity getEntity(IComponent iComponent);
 }

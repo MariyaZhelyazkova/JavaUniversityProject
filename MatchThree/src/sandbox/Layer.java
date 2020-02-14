@@ -1,20 +1,14 @@
 package sandbox;
 
 import ECS.base.ComponentManager;
+import ECS.base.interfaceses.Entity;
 import ECS.implementation.components.BoardComponent;
-import ECS.implementation.components.CPosition;
-import ECS.implementation.components.CScreenPosition;
-import ECS.implementation.components.CTexture;
-import ECS.implementation.entity.Entity;
-import ECS.implementation.entity.TileTypes;
 import events.implementation.ClickEvent;
-import events.implementation.CreateTileEntityEvent;
 import events.implementation.EventDispatcher;
 import events.implementation.InitPopulationEvent;
 
 import java.awt.*;
 import java.awt.event.MouseEvent;
-import java.util.Random;
 
 public class Layer extends Entity {
 
@@ -22,7 +16,7 @@ public class Layer extends Entity {
     private final int paddingTop;
     private final int paddingLeft;
 
-    public Layer(int xSize, int ySize,  int paddingTop, int paddingLeft, EventDispatcher eventDispatcher, ComponentManager componentManager) {
+    public Layer(int xSize, int ySize, int paddingTop, int paddingLeft, EventDispatcher eventDispatcher, ComponentManager componentManager) {
         this.eventDispatcher = eventDispatcher;
         this.paddingLeft = paddingLeft;
         this.paddingTop = paddingTop;
