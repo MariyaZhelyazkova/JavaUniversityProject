@@ -4,6 +4,6 @@ public enum EventType {
     EntityDestroyed,
     Move,
     Click,
-    CreateEntity,
+    CreateMissing,
     InitPopulation
 }

@@ -5,26 +5,12 @@ import events.base.IEvent;
 import events.base.IInstructions;
 import events.types.EventType;
 
-public class CreateTileEntityEvent implements IEvent {
-    private final EventType eventType = EventType.CreateEntity;
+public class CreateMissingEvent implements IEvent {
+    private final EventType eventType = EventType.CreateMissing;
     private boolean handled = false;
-    private final int xPos, yPos;
-
-    public CreateTileEntityEvent( int x, int y){
-        this.xPos = x;
-        this.yPos = y;
-    }
 
     public void setHandled(boolean handled) {
         this.handled = handled;
-    }
-
-    public int getxPos() {
-        return xPos;
-    }
-
-    public int getyPos() {
-        return yPos;
     }
 
     @Override

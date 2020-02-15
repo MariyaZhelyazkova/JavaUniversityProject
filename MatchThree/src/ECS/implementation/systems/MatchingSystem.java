@@ -12,7 +12,6 @@ import events.implementation.*;
 import events.types.EventType;
 
 import java.util.List;
-import java.util.Random;
 import java.util.Vector;
 
 public class MatchingSystem implements ISystem, IEventListener {
@@ -84,11 +83,12 @@ public class MatchingSystem implements ISystem, IEventListener {
 
                 Entity entity = findEntityAt(x, y);
                 if (entity == null)
-                    eventDispatcher.publish(new CreateTileEntityEvent(x, y));
+                   continue;
+
                 if (removedEntities.contains(entity))
                     stepY++;
                 else if (stepY > 0) {
-                    eventDispatcher.publish(new MoveEvent(entity, x, y + stepY));
+                    eventDispatcher.publish(new MoveEvent(entity, x, y + stepY, new CreateMissingEvent()));
                     System.out.println("New position is  x= " + x + "  y =  " + (y + stepY));
                 }
 

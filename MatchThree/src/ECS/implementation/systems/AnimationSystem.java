@@ -32,22 +32,24 @@ public class AnimationSystem implements ISystem, IEventListener {
         this.componentManager = componentManager;
     }
 
-    public void doAnimations(){
-        System.out.println("Animations!!!");
+    public void doAnimations() {
         animations.forEach((key, value) -> {
             CScreenPosition cScreenPosition = (CScreenPosition) componentManager.getComponent(key, ComponentType.ScreenPosition);
             if (cScreenPosition.getX() != value.getX())
                 cScreenPosition.setX(cScreenPosition.getX() + value.getStep());
-            else if(cScreenPosition.getY() != value.getY())
+            else if (cScreenPosition.getY() != value.getY())
                 cScreenPosition.setY(cScreenPosition.getY() + value.getStep());
-            else
+            else {
                 value.setFinished(true);
+                if (value.getOnFinished() != null)
+                    eventDispatcher.publish(value.getOnFinished());
+            }
         });
 
         animations.entrySet().removeIf(entry -> entry.getValue().isFinished());
     }
 
-    public boolean hasAnimations(){
+    public boolean hasAnimations() {
         return animations.size() > 0;
     }
 
@@ -65,7 +67,7 @@ public class AnimationSystem implements ISystem, IEventListener {
     public void onEvent(IEvent e) {
         if (e.getEventType() == EventType.Move) {
             MoveEvent event = (MoveEvent) e;
-            animations.put(e.getEntity(), new MoveInstruction(event.getX() * 64 + 100, event.getY() * 64 + 50, 2));
+            animations.put(e.getEntity(), new MoveInstruction(event.getX() * 64 + 100, event.getY() * 64 + 50, 2, event.getOnFinish()));
             CPosition cPosition = (CPosition) componentManager.getComponent(event.getEntity(), ComponentType.Position);
             cPosition.setX(event.getX());
             cPosition.setY(event.getY());

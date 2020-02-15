@@ -8,8 +8,6 @@ import ECS.base.types.SystemType;
 import ECS.implementation.components.CPosition;
 import events.base.IEvent;
 import events.base.IEventListener;
-import events.implementation.ClickEvent;
-import events.implementation.CreateTileEntityEvent;
 
 import java.util.List;
 import java.util.Vector;

@@ -12,11 +12,11 @@ import ECS.base.interfaceses.Entity;
 import ECS.implementation.entity.TileTypes;
 import events.base.IEvent;
 import events.base.IEventListener;
-import events.implementation.CreateTileEntityEvent;
 import events.implementation.EventDispatcher;
 import events.types.EventType;
 import sandbox.Layer;
 
+import java.util.List;
 import java.util.Random;
 import java.util.Vector;
 
@@ -34,7 +34,7 @@ public class PopulatingSystem implements ISystem, IEventListener {
         this.componentManager = componentManager;
     }
 
-    private void createEntityAt(int xPos, int yPos, String tileType, BoardComponent boardComponent) {
+    private void createEntityAt(int xPos, int yPos, String tileType) {
         Entity entity = new Entity(tileType);
 
         try {
@@ -54,7 +54,25 @@ public class PopulatingSystem implements ISystem, IEventListener {
         Random rand = new Random();
         for (int y = 0; y < boardComponent.getySize(); y++)
             for (int x = 0; x < boardComponent.getXSize(); x++)
-                createEntityAt(x, y, TileTypes.TILE_TYPES.get(rand.nextInt(6)), boardComponent);
+                createEntityAt(x, y, TileTypes.TILE_TYPES.get(rand.nextInt(6)));
+    }
+
+    private Entity findEntityAt(int xPos, int yPos) {
+        @SuppressWarnings("unchecked")
+        List<CPosition> components = (List<CPosition>) (List<?>) componentManager.getComponent(ComponentType.Position);
+        for (CPosition cPosition : components)
+            if (cPosition.getY() == yPos && cPosition.getX() == xPos)
+                return componentManager.getEntity(cPosition);
+
+        return null;
+    }
+    private void CreateMissing() {
+        Random rand = new Random();
+
+        for (int y = 0; y < boardComponent.getySize(); y++)
+            for (int x = 0; x < boardComponent.getXSize(); x++)
+                if (findEntityAt(x,y) == null)
+                    createEntityAt(x, y, TileTypes.TILE_TYPES.get(rand.nextInt(6)));
     }
 
     @Override
@@ -72,11 +90,9 @@ public class PopulatingSystem implements ISystem, IEventListener {
         if (e.getEventType() == EventType.InitPopulation) {
             Layer layer = (Layer) e.getEntity();
             initPopulation((BoardComponent) componentManager.getComponent(layer, ComponentType.Board));
-        } else if (e.getEventType() == EventType.CreateEntity){
+        } else if (e.getEventType() == EventType.CreateMissing){
             System.out.println("In creation");
-            Random rand = new Random();
-            CreateTileEntityEvent event = (CreateTileEntityEvent) e;
-            createEntityAt(event.getxPos(), event.getyPos(), TileTypes.TILE_TYPES.get(rand.nextInt(6)), boardComponent);
+            CreateMissing();
         }
     }
 

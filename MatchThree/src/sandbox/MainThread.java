@@ -32,7 +32,7 @@ public class MainThread extends Thread {
 
         PopulatingSystem populatingSystem = new PopulatingSystem(eventDispatcher, componentManager);
         eventDispatcher.subscribe(EventType.InitPopulation, populatingSystem);
-        eventDispatcher.subscribe(EventType.CreateEntity, populatingSystem);
+        eventDispatcher.subscribe(EventType.CreateMissing, populatingSystem);
 
         MatchingSystem matchingSystem = new MatchingSystem(componentManager, eventDispatcher);
         eventDispatcher.subscribe(EventType.Click, matchingSystem);

@@ -9,13 +9,15 @@ public class MoveEvent implements IEvent {
 
     private final EventType eventType = EventType.Move;
     private final int x, y;
+    private final IEvent onFinish;
     private boolean handled = false;
     private Entity entity;
 
-    public MoveEvent(Entity entity, int x, int y) {
-        this.entity = entity;
+    public MoveEvent(Entity entity, int x, int y, IEvent onFinish) {
         this.x = x;
         this.y = y;
+        this.entity = entity;
+        this.onFinish = onFinish;
     }
 
     public int getX() {
@@ -24,6 +26,10 @@ public class MoveEvent implements IEvent {
 
     public int getY() {
         return y;
+    }
+
+    public IEvent getOnFinish() {
+        return onFinish;
     }
 
     @Override
