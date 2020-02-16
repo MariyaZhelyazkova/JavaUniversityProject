@@ -5,22 +5,30 @@ import events.base.IEvent;
 import events.base.IInstructions;
 import events.types.EventType;
 
-public class ClickEvent implements IEvent {
-    private final EventType eventType = EventType.Click;
+public class ScaleEvent implements IEvent {
+    private final EventType eventType = EventType.Scale;
+    private final int height, width;
+    private final int step;
+    private final Entity entity;
     private boolean handled = false;
-    private final int xPos, yPos;
 
-    public ClickEvent( int x, int y){
-        this.xPos = x;
-        this.yPos = y;
+    public ScaleEvent(int step, Entity entity, int height, int width) {
+        this.step = step;
+        this.entity = entity;
+        this.height = height;
+        this.width = width;
     }
 
-    public int getxPos() {
-        return xPos;
+    public int getHeight() {
+        return height;
     }
 
-    public int getyPos() {
-        return yPos;
+    public int getWidth() {
+        return width;
+    }
+
+    public int getStep() {
+        return step;
     }
 
     @Override
@@ -40,12 +48,12 @@ public class ClickEvent implements IEvent {
 
     @Override
     public Entity getEntity() {
-        return null;
+        return entity;
     }
 
     @Override
     public String toString() {
-        return "ClickEvent{" +
+        return "ScaleEvent{" +
                 "eventType=" + eventType +
                 '}';
     }

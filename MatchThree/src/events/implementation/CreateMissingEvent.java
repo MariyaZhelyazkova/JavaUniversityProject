@@ -32,4 +32,11 @@ public class CreateMissingEvent implements IEvent {
     public Entity getEntity() {
         return null;
     }
+
+    @Override
+    public String toString() {
+        return "CreateMissingEvent{" +
+                "eventType=" + eventType +
+                '}';
+    }
 }

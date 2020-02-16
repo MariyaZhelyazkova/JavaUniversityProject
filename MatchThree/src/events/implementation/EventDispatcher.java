@@ -41,6 +41,7 @@ public class EventDispatcher implements IEventDispatcher {
 
         Vector<IEvent> eventsQueue = new Vector<>(events);
         events.clear();
+//        System.out.println(eventsQueue.toString());
 
         eventsQueue.forEach((event -> {
             Vector<IEventListener> currListeners = listeners.get(event.getEventType());

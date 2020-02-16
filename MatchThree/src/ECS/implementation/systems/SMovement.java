@@ -6,7 +6,7 @@ import ECS.base.types.SystemType;
 import ECS.implementation.systems.types.MovementType;
 import events.base.IEvent;
 import events.base.IEventListener;
-import events.implementation.instructions.MoveInstruction;
+import events.implementation.instructions.AnimationInstruction;
 import events.types.EventType;
 
 import java.util.Vector;
@@ -38,7 +38,7 @@ public class SMovement implements ISystem, IEventListener {
         if (e.getEventType() != EventType.Move)
             return;
 
-        MoveInstruction mi = (MoveInstruction) e.getEventInstruction();
+        AnimationInstruction mi = (AnimationInstruction) e.getEventInstruction();
         System.out.println(mi.toString());
     }
 

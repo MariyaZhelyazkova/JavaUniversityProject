@@ -55,4 +55,12 @@ public class MoveEvent implements IEvent {
     public Entity getEntity() {
         return entity;
     }
+
+    @Override
+    public String toString() {
+        return "MoveEvent{" +
+                "x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

@@ -4,7 +4,6 @@ import ECS.base.ComponentManager;
 import ECS.implementation.systems.AnimationSystem;
 import ECS.implementation.systems.MatchingSystem;
 import ECS.implementation.systems.PopulatingSystem;
-import ECS.implementation.systems.SWorld;
 import events.implementation.EventDispatcher;
 import events.types.EventType;
 
@@ -12,6 +11,10 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class MainThread extends Thread {
+
+    private final static int MAX_FPS = 60;
+    private final static int MAX_FRAME_SKIPS = 5;
+    private final static int FRAME_PERIOD = 1000 / MAX_FPS;
 
     private final EventDispatcher eventDispatcher;
     private boolean running = false;
@@ -27,9 +30,6 @@ public class MainThread extends Thread {
         this.board.setComponentManager(componentManager);
         eventDispatcher.subscribe(EventType.EntityDestroyed, componentManager);
 
-//        SWorld sWorld = new SWorld(componentManager);
-//        eventDispatcher.subscribe(EventType.Click, sWorld);
-
         PopulatingSystem populatingSystem = new PopulatingSystem(eventDispatcher, componentManager);
         eventDispatcher.subscribe(EventType.InitPopulation, populatingSystem);
         eventDispatcher.subscribe(EventType.CreateMissing, populatingSystem);
@@ -39,6 +39,7 @@ public class MainThread extends Thread {
 
         animationSystem = new AnimationSystem(eventDispatcher, componentManager);
         eventDispatcher.subscribe(EventType.Move, animationSystem);
+        eventDispatcher.subscribe(EventType.Scale, animationSystem);
 
         Layer layer = new Layer(8, 8, 50, 100, eventDispatcher, componentManager);
 
@@ -53,22 +54,39 @@ public class MainThread extends Thread {
     public void setRunning(boolean running) {
         this.running = running;
     }
+    private void update(){
+        if (animationSystem.hasAnimations())
+            animationSystem.doAnimations();
+        else
+            eventDispatcher.dispatchEvent();
+    }
 
     @Override
     public void run() {
         System.out.println("Running.....");
 
         while (running) {
-            if (animationSystem.hasAnimations())
-                animationSystem.doAnimations();
-            else
-                eventDispatcher.dispatchEvent();
+            long beginTime = System.currentTimeMillis();
+            int frameSkiped = 0;
+            update();
 
+            long renTime = System.nanoTime();
             board.repaint();
-            try {
-                this.sleep(16);
-            } catch (Exception e) {
-                System.out.println(e.getMessage());
+//            System.out.println("Rendering time " + (System.nanoTime() - renTime) / 1000000 + "ms");
+
+            long timeDiff = System.currentTimeMillis() - beginTime;
+            int sleepTime = (int) (FRAME_PERIOD - timeDiff);
+            if (sleepTime > 0) {
+                try {
+                    sleep(sleepTime);
+                } catch (InterruptedException e) {
+                }
+            }
+
+            while (sleepTime < 0 && frameSkiped < MAX_FRAME_SKIPS) {
+                //update();
+                sleepTime += FRAME_PERIOD;
+                frameSkiped++;
             }
         }
 

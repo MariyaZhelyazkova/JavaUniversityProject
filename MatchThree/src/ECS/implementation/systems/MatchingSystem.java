@@ -45,9 +45,7 @@ public class MatchingSystem implements ISystem, IEventListener {
 
         addNeighbour((CPosition) componentManager.getComponent(entity, ComponentType.Position), positions, matchedEntity);
 
-        System.out.println(matchedEntity.toString());
-
-        if (matchedEntity.size() > 2) {
+        if (matchedEntity.size() > 1) {
             destroyEntities(matchedEntity);
             rearangeEnitities(matchedEntity);
             return true;
@@ -83,17 +81,14 @@ public class MatchingSystem implements ISystem, IEventListener {
 
                 Entity entity = findEntityAt(x, y);
                 if (entity == null)
-                   continue;
+                    continue;
 
                 if (removedEntities.contains(entity))
                     stepY++;
                 else if (stepY > 0) {
-                    eventDispatcher.publish(new MoveEvent(entity, x, y + stepY, new CreateMissingEvent()));
-                    System.out.println("New position is  x= " + x + "  y =  " + (y + stepY));
+                    eventDispatcher.publish(new MoveEvent(entity, x, y + stepY, null));
                 }
-
             }
-            System.out.println("For x= " + x + " the y step is " + stepY);
         }
     }
 

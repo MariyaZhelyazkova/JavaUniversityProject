@@ -5,5 +5,6 @@ public enum EventType {
     Move,
     Click,
     CreateMissing,
-    InitPopulation
+    InitPopulation,
+    Scale
 }

@@ -37,4 +37,11 @@ public class EntityDestroyedEvent implements IEvent {
     public Entity getEntity() {
         return entity;
     }
+
+    @Override
+    public String toString() {
+        return "EntityDestroyedEvent{" +
+                "eventType=" + eventType +
+                '}';
+    }
 }

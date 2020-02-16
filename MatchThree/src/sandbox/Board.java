@@ -36,10 +36,11 @@ public class Board extends JPanel {
     @Override
     public void paint(Graphics g) {
         super.paintComponent(g);
+        Graphics2D graphics2D = (Graphics2D) g;
 
         componentManager.getComponents().forEach((key, value) -> {
             if (componentManager.entityHasComponents(key, sRenderer.getRequiredComponents()))
-                sRenderer.draw(g,
+                sRenderer.draw(graphics2D,
                         (CScreenPosition) componentManager.getComponent(key, ComponentType.ScreenPosition),
                         (CTexture) componentManager.getComponent(key, ComponentType.Texture));
         });

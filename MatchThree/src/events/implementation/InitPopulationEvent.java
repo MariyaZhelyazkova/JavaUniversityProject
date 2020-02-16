@@ -33,4 +33,11 @@ public class InitPopulationEvent implements IEvent {
     public Entity getEntity() {
         return entity;
     }
+
+    @Override
+    public String toString() {
+        return "InitPopulationEvent{" +
+                "eventType=" + eventType +
+                '}';
+    }
 }
