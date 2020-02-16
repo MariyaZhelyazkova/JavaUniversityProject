@@ -11,12 +11,18 @@ public class ScaleEvent implements IEvent {
     private final int step;
     private final Entity entity;
     private boolean handled = false;
+    private final IEvent onFinish;
 
-    public ScaleEvent(int step, Entity entity, int height, int width) {
+    public ScaleEvent(int step, Entity entity, int height, int width, IEvent onFinish) {
         this.step = step;
         this.entity = entity;
         this.height = height;
         this.width = width;
+        this.onFinish = onFinish;
+    }
+
+    public IEvent getOnFinish() {
+        return onFinish;
     }
 
     public int getHeight() {

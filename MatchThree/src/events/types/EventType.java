@@ -6,5 +6,6 @@ public enum EventType {
     Click,
     CreateMissing,
     InitPopulation,
-    Scale
+    Scale,
+    ArrangeEntities
 }

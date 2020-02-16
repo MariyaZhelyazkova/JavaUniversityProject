@@ -10,13 +10,15 @@ public class MoveEvent implements IEvent {
     private final EventType eventType = EventType.Move;
     private final int x, y;
     private final IEvent onFinish;
+    private final int stepMiltiplier;
     private boolean handled = false;
     private Entity entity;
 
-    public MoveEvent(Entity entity, int x, int y, IEvent onFinish) {
+    public MoveEvent(Entity entity, int x, int y, int multiplier, IEvent onFinish) {
         this.x = x;
         this.y = y;
         this.entity = entity;
+        this.stepMiltiplier = multiplier;
         this.onFinish = onFinish;
     }
 
@@ -30,6 +32,10 @@ public class MoveEvent implements IEvent {
 
     public IEvent getOnFinish() {
         return onFinish;
+    }
+
+    public int getStepMiltiplier() {
+        return stepMiltiplier;
     }
 
     @Override

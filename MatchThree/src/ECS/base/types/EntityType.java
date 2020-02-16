@@ -20,6 +20,7 @@ public final class EntityType {
     public static final String STAWBERRY = "images/stawberry.png";
 
     public static final String STATIC_ENTITY = "STATIC_ENTITY";
+    public static final String HOLDER = "images/holder.png";
 
     public static Vector<String> TILE_TYPES = new Vector<>() {{
         add(RED);

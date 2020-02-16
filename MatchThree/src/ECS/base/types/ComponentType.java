@@ -4,5 +4,6 @@ public enum ComponentType {
     Position,
     Texture,
     ScreenPosition,
-    Board
+    Board,
+    Static
 }

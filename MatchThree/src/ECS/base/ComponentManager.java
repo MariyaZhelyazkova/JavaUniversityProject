@@ -6,6 +6,8 @@ import ECS.base.interfaceses.Entity;
 import ECS.base.types.ComponentType;
 import events.base.IEvent;
 import events.base.IEventListener;
+import events.implementation.ArrangeAntitiesEvent;
+import events.implementation.EventDispatcher;
 import events.types.EventType;
 
 import java.util.HashMap;
@@ -13,10 +15,11 @@ import java.util.Vector;
 
 public class ComponentManager implements IComponentManager, IEventListener {
 
-    private HashMap<Entity, Vector<IComponent>> components;
+    private HashMap<Entity, Vector<IComponent>> components = new HashMap<>();;
+    private final EventDispatcher eventDispatcher;
 
-    public ComponentManager(){
-        components = new HashMap<>();
+    public ComponentManager(EventDispatcher eventDispatcher) {
+        this.eventDispatcher = eventDispatcher;
     }
 
     public Vector<ComponentType> getComponentsType(Entity entity){
@@ -118,6 +121,7 @@ public class ComponentManager implements IComponentManager, IEventListener {
     public void onEvent(IEvent e) {
         if (e.getEventType() == EventType.EntityDestroyed){
             unregisterEntity(e.getEntity());
+            eventDispatcher.publish(new ArrangeAntitiesEvent());
         }
     }
 

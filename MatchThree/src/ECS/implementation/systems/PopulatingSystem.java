@@ -10,10 +10,11 @@ import ECS.implementation.components.BoardComponent;
 import ECS.implementation.components.CPosition;
 import ECS.implementation.components.CScreenPosition;
 import ECS.implementation.components.CTexture;
-import ECS.implementation.entity.TileTypes;
 import events.base.IEvent;
 import events.base.IEventListener;
+import events.implementation.CreateMissingEvent;
 import events.implementation.EventDispatcher;
+import events.implementation.MoveEvent;
 import events.implementation.ScaleEvent;
 import events.types.EventType;
 import sandbox.Layer;
@@ -47,8 +48,8 @@ public class PopulatingSystem implements ISystem, IEventListener {
             componentManager.registerEntity(entity);
             componentManager.addComponent(entity, new CPosition(xPos, yPos));
             componentManager.addComponent(entity, new CScreenPosition(
-                    xPos * boardComponent.getEntitySze() +  boardComponent.getPaddingLeft(),
-                    yPos * boardComponent.getEntitySze() +  boardComponent.getPaddingTop()));
+                    xPos * boardComponent.getEntitySze() + boardComponent.getPaddingLeft(),
+                    yPos * boardComponent.getEntitySze() + boardComponent.getPaddingTop()));
             componentManager.addComponent(entity, new CTexture(tileType, width, heigth));
 
             return entity;
@@ -77,7 +78,7 @@ public class PopulatingSystem implements ISystem, IEventListener {
         return null;
     }
 
-    private void CreateMissing() {
+    private void createMissing() {
         Random rand = new Random();
 
         for (int y = 0; y < boardComponent.getySize(); y++)
@@ -85,8 +86,27 @@ public class PopulatingSystem implements ISystem, IEventListener {
                 if (findEntityAt(x, y) == null) {
                     Entity entity = createEntityAt(x, y, EntityType.TILE_TYPES.get(rand.nextInt(6)), 2, 2);
                     if (entity != null)
-                        eventDispatcher.publish(new ScaleEvent(4, entity, boardComponent.getEntitySze(), boardComponent.getEntitySze()));
+                        eventDispatcher.publish(new ScaleEvent(4, entity, boardComponent.getEntitySze(), boardComponent.getEntitySze(), null));
                 }
+    }
+
+    private void arrangeEntities() {
+        int events = 0;
+        for (int x = 0; x < boardComponent.getXSize(); x++) {
+            int stepY = 0;
+            for (int y = boardComponent.getySize() -1; y >= 0; y--) {
+                Entity entity = findEntityAt(x, y);
+                if (entity == null)
+                    stepY++;
+                else if (stepY > 0) {
+                    events++;
+                    eventDispatcher.publish(new MoveEvent(entity, x, y + stepY, stepY, new CreateMissingEvent()));
+                }
+            }
+        }
+
+        if (events == 0)
+            eventDispatcher.publish(new CreateMissingEvent());
     }
 
     @Override
@@ -105,7 +125,9 @@ public class PopulatingSystem implements ISystem, IEventListener {
             Layer layer = (Layer) e.getEntity();
             initPopulation((BoardComponent) componentManager.getComponent(layer, ComponentType.Board));
         } else if (e.getEventType() == EventType.CreateMissing)
-            CreateMissing();
+            createMissing();
+        else if (e.getEventType() == EventType.ArrangeEntities)
+            arrangeEntities();
     }
 
     @Override

@@ -1,6 +1,11 @@
 package sandbox;
 
 import ECS.base.ComponentManager;
+import ECS.base.interfaceses.Entity;
+import ECS.base.types.EntityType;
+import ECS.implementation.components.CScreenPosition;
+import ECS.implementation.components.CTexture;
+import ECS.implementation.components.ControllerComponent;
 import ECS.implementation.systems.AnimationSystem;
 import ECS.implementation.systems.MatchingSystem;
 import ECS.implementation.systems.PopulatingSystem;
@@ -26,12 +31,22 @@ public class MainThread extends Thread {
         this.board = board;
         this.eventDispatcher = new EventDispatcher();
 
-        ComponentManager componentManager = new ComponentManager();
+        ComponentManager componentManager = new ComponentManager(eventDispatcher);
         this.board.setComponentManager(componentManager);
         eventDispatcher.subscribe(EventType.EntityDestroyed, componentManager);
 
+        Entity controllerEntity = new Entity(EntityType.STATIC_ENTITY);
+        componentManager.registerEntity(controllerEntity);
+        try {
+            componentManager.addComponent(controllerEntity, new ControllerComponent(30, EntityType.RED, 20));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
         PopulatingSystem populatingSystem = new PopulatingSystem(eventDispatcher, componentManager);
         eventDispatcher.subscribe(EventType.InitPopulation, populatingSystem);
+        eventDispatcher.subscribe(EventType.ArrangeEntities, populatingSystem);
         eventDispatcher.subscribe(EventType.CreateMissing, populatingSystem);
 
         MatchingSystem matchingSystem = new MatchingSystem(componentManager, eventDispatcher);
@@ -41,7 +56,7 @@ public class MainThread extends Thread {
         eventDispatcher.subscribe(EventType.Move, animationSystem);
         eventDispatcher.subscribe(EventType.Scale, animationSystem);
 
-        Layer layer = new Layer(8, 8, 50, 100, eventDispatcher, componentManager);
+        Layer layer = new Layer(6, 6, 108, 208, eventDispatcher, componentManager);
 
         this.board.addMouseListener(new MouseAdapter() {
             @Override
@@ -84,7 +99,7 @@ public class MainThread extends Thread {
             }
 
             while (sleepTime < 0 && frameSkiped < MAX_FRAME_SKIPS) {
-                //update();
+                update();
                 sleepTime += FRAME_PERIOD;
                 frameSkiped++;
             }

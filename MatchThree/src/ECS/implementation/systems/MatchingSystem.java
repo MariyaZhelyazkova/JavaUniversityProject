@@ -47,7 +47,6 @@ public class MatchingSystem implements ISystem, IEventListener {
 
         if (matchedEntity.size() > 1) {
             destroyEntities(matchedEntity);
-            rearangeEnitities(matchedEntity);
             return true;
         }
 
@@ -71,25 +70,7 @@ public class MatchingSystem implements ISystem, IEventListener {
 
     private void destroyEntities(List<Entity> destroyEntities) {
         for (Entity entity : destroyEntities)
-            eventDispatcher.publish(new EntityDestroyedEvent(entity));
-    }
-
-    private void rearangeEnitities(List<Entity> removedEntities) {
-        for (int x = 0; x < 8; x++) {
-            int stepY = 0;
-            for (int y = 7; y >= 0; y--) {
-
-                Entity entity = findEntityAt(x, y);
-                if (entity == null)
-                    continue;
-
-                if (removedEntities.contains(entity))
-                    stepY++;
-                else if (stepY > 0) {
-                    eventDispatcher.publish(new MoveEvent(entity, x, y + stepY, null));
-                }
-            }
-        }
+            eventDispatcher.publish(new ScaleEvent(-4, entity, 2, 2, new EntityDestroyedEvent(entity)));
     }
 
     @Override
