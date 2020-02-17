@@ -1,11 +1,11 @@
 package ECS.implementation.systems;
 
 import ECS.base.ComponentManager;
-import ECS.base.interfaceses.Entity;
+import ECS.base.Entity;
 import ECS.base.interfaceses.ISystem;
 import ECS.base.types.ComponentType;
 import ECS.base.types.SystemType;
-import ECS.implementation.components.CPosition;
+import ECS.implementation.components.PositionComponent;
 import events.base.IEvent;
 import events.base.IEventListener;
 import events.implementation.*;
@@ -29,10 +29,10 @@ public class MatchingSystem implements ISystem, IEventListener {
 
     private Entity findEntityAt(int xPos, int yPos) {
         @SuppressWarnings("unchecked")
-        List<CPosition> components = (List<CPosition>) (List<?>) componentManager.getComponent(ComponentType.Position);
-        for (CPosition cPosition : components)
-            if (cPosition.getY() == yPos && cPosition.getX() == xPos)
-                return componentManager.getEntity(cPosition);
+        List<PositionComponent> components = (List<PositionComponent>) (List<?>) componentManager.getComponent(ComponentType.Position);
+        for (PositionComponent positionComponent : components)
+            if (positionComponent.getY() == yPos && positionComponent.getX() == xPos)
+                return componentManager.getEntity(positionComponent);
 
         return null;
     }
@@ -41,9 +41,9 @@ public class MatchingSystem implements ISystem, IEventListener {
         Vector<Entity> matchedEntity = new Vector<>();
 
         @SuppressWarnings("unchecked")
-        List<CPosition> positions = (List<CPosition>) (List<?>) componentManager.getComponents(entity.getEntityType(), ComponentType.Position);
+        List<PositionComponent> positions = (List<PositionComponent>) (List<?>) componentManager.getComponents(entity.getEntityType(), ComponentType.Position);
 
-        addNeighbour((CPosition) componentManager.getComponent(entity, ComponentType.Position), positions, matchedEntity);
+        addNeighbour((PositionComponent) componentManager.getComponent(entity, ComponentType.Position), positions, matchedEntity);
 
         if (matchedEntity.size() > 1) {
             destroyEntities(matchedEntity);
@@ -53,12 +53,12 @@ public class MatchingSystem implements ISystem, IEventListener {
         return false;
     }
 
-    private void addNeighbour(CPosition cPosition, List<CPosition> positions, List<Entity> matchedEntity) {
-        for (CPosition position : positions) {
-            if ((position.getX() == cPosition.getX() && position.getY() == cPosition.getY() + 1) ||
-                    (position.getX() == cPosition.getX() && position.getY() == cPosition.getY() - 1) ||
-                    (position.getX() == cPosition.getX() + 1 && position.getY() == cPosition.getY()) ||
-                    (position.getX() == cPosition.getX() - 1 && position.getY() == cPosition.getY())) {
+    private void addNeighbour(PositionComponent positionComponent, List<PositionComponent> positions, List<Entity> matchedEntity) {
+        for (PositionComponent position : positions) {
+            if ((position.getX() == positionComponent.getX() && position.getY() == positionComponent.getY() + 1) ||
+                    (position.getX() == positionComponent.getX() && position.getY() == positionComponent.getY() - 1) ||
+                    (position.getX() == positionComponent.getX() + 1 && position.getY() == positionComponent.getY()) ||
+                    (position.getX() == positionComponent.getX() - 1 && position.getY() == positionComponent.getY())) {
                 Entity entity = componentManager.getEntity(position);
                 if (!matchedEntity.contains(entity)) {
                     matchedEntity.add(entity);

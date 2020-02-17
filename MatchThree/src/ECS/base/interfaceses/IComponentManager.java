@@ -1,5 +1,6 @@
 package ECS.base.interfaceses;
 
+import ECS.base.Entity;
 import ECS.base.types.ComponentType;
 
 import java.util.Vector;

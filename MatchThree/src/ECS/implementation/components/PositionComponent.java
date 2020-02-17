@@ -3,7 +3,7 @@ package ECS.implementation.components;
 import ECS.base.interfaceses.IComponent;
 import ECS.base.types.ComponentType;
 
-public class CPosition implements IComponent {
+public class PositionComponent implements IComponent {
     private final ComponentType componentType = ComponentType.Position;
 
     private int x, y;
@@ -24,7 +24,7 @@ public class CPosition implements IComponent {
         this.y = y;
     }
 
-    public CPosition(int x, int y) {
+    public PositionComponent(int x, int y) {
         this.x = x;
         this.y = y;
     }

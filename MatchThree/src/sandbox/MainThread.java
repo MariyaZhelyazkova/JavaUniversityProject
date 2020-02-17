@@ -1,11 +1,10 @@
 package sandbox;
 
 import ECS.base.ComponentManager;
-import ECS.base.interfaceses.Entity;
+import ECS.base.Entity;
 import ECS.base.types.EntityType;
-import ECS.implementation.components.CScreenPosition;
-import ECS.implementation.components.CTexture;
 import ECS.implementation.components.ControllerComponent;
+import ECS.implementation.entity.Layer;
 import ECS.implementation.systems.AnimationSystem;
 import ECS.implementation.systems.MatchingSystem;
 import ECS.implementation.systems.PopulatingSystem;

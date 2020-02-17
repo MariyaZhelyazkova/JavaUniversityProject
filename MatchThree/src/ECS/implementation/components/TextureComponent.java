@@ -8,13 +8,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class CTexture implements IComponent {
+public class TextureComponent implements IComponent {
     private final ComponentType componentType = ComponentType.Texture;
     private final String imageName;
     private BufferedImage texture;
     private int height, width;
 
-    public CTexture(String imageName, int width, int height) throws Exception {
+    public TextureComponent(String imageName, int width, int height) throws Exception {
         if (!imageName.isBlank()) {
             this.imageName = imageName;
             this.width = width;

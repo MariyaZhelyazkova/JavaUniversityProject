@@ -1,23 +1,20 @@
 package ECS.implementation.systems;
 
 import ECS.base.ComponentManager;
-import ECS.base.interfaceses.Entity;
+import ECS.base.Entity;
 import ECS.base.interfaceses.ISystem;
 import ECS.base.types.ComponentType;
 import ECS.base.types.SystemType;
-import ECS.implementation.components.CPosition;
-import ECS.implementation.components.CScreenPosition;
-import ECS.implementation.components.CTexture;
+import ECS.implementation.components.PositionComponent;
+import ECS.implementation.components.ScreenPositionComponent;
+import ECS.implementation.components.TextureComponent;
 import events.base.IEvent;
 import events.base.IEventListener;
-import events.implementation.CreateMissingEvent;
 import events.implementation.EventDispatcher;
 import events.implementation.MoveEvent;
 import events.implementation.ScaleEvent;
-import events.implementation.instructions.AnimationInstruction;
 import events.types.EventType;
 
-import javax.swing.plaf.basic.BasicSplitPaneUI;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Vector;
@@ -40,9 +37,9 @@ public class AnimationSystem implements ISystem, IEventListener {
     private void onMoveEvent(MoveEvent event) {
         animations.put(event.getEntity(), new AnimationInstruction(event.getX() * 64 + 208, event.getY() * 64 + 108, 4 * event.getStepMiltiplier(),
                 event.getOnFinish(), AnimationInstruction.Type.Move));
-        CPosition cPosition = (CPosition) componentManager.getComponent(event.getEntity(), ComponentType.Position);
-        cPosition.setX(event.getX());
-        cPosition.setY(event.getY());
+        PositionComponent positionComponent = (PositionComponent) componentManager.getComponent(event.getEntity(), ComponentType.Position);
+        positionComponent.setX(event.getX());
+        positionComponent.setY(event.getY());
     }
 
     private void onScaleEvent(ScaleEvent event) {
@@ -50,37 +47,37 @@ public class AnimationSystem implements ISystem, IEventListener {
                 event.getOnFinish(), AnimationInstruction.Type.Scale));
     }
 
-    private void moveAnimation(CScreenPosition cScreenPosition, AnimationInstruction value) {
-        if (cScreenPosition.getX() != value.getX())
-            cScreenPosition.setX(cScreenPosition.getX() + value.getStep());
+    private void moveAnimation(ScreenPositionComponent screenPositionComponent, AnimationInstruction value) {
+        if (screenPositionComponent.getX() != value.getX())
+            screenPositionComponent.setX(screenPositionComponent.getX() + value.getStep());
 
-        if (cScreenPosition.getY() != value.getY())
-            cScreenPosition.setY(cScreenPosition.getY() + value.getStep());
+        if (screenPositionComponent.getY() != value.getY())
+            screenPositionComponent.setY(screenPositionComponent.getY() + value.getStep());
 
-        if ((value.getStep() > 0 && cScreenPosition.getX() >= value.getX() && cScreenPosition.getY() >= value.getY()) ||
-                (value.getStep() < 0 && cScreenPosition.getX() <= value.getX() && cScreenPosition.getY() <= value.getY())) {
-            cScreenPosition.setX(value.getX());
-            cScreenPosition.setY(value.getY());
+        if ((value.getStep() > 0 && screenPositionComponent.getX() >= value.getX() && screenPositionComponent.getY() >= value.getY()) ||
+                (value.getStep() < 0 && screenPositionComponent.getX() <= value.getX() && screenPositionComponent.getY() <= value.getY())) {
+            screenPositionComponent.setX(value.getX());
+            screenPositionComponent.setY(value.getY());
             value.setFinished(true);
         }
     }
 
-    private void scaleAnimation(CTexture cTexture, CScreenPosition cScreenPosition, AnimationInstruction value) {
-        if (cTexture.getWidth() != value.getX()) {
-            cTexture.setWidth(cTexture.getWidth() + value.getStep());
-            cTexture.setHeight(cTexture.getHeight() + value.getStep());
+    private void scaleAnimation(TextureComponent textureComponent, ScreenPositionComponent screenPositionComponent, AnimationInstruction value) {
+        if (textureComponent.getWidth() != value.getX()) {
+            textureComponent.setWidth(textureComponent.getWidth() + value.getStep());
+            textureComponent.setHeight(textureComponent.getHeight() + value.getStep());
 //
 //            cScreenPosition.setY(cScreenPosition.getY()  - value.getStep() /2);
 //            cScreenPosition.setX(cScreenPosition.getX() - value.getStep() /2);
 
-            if ((value.getStep() > 0 && cTexture.getHeight() >= value.getY() && cTexture.getWidth() >= value.getX()) ||
-            ((value.getStep() < 0 && cTexture.getHeight() <= value.getY() && cTexture.getWidth() <= value.getX()))) {
+            if ((value.getStep() > 0 && textureComponent.getHeight() >= value.getY() && textureComponent.getWidth() >= value.getX()) ||
+            ((value.getStep() < 0 && textureComponent.getHeight() <= value.getY() && textureComponent.getWidth() <= value.getX()))) {
                 value.setFinished(true);
-                cTexture.setHeight(value.getY());
-                cTexture.setWidth(value.getX());
+                textureComponent.setHeight(value.getY());
+                textureComponent.setWidth(value.getX());
             }
 
-            cTexture.recalculateTexture();
+            textureComponent.recalculateTexture();
 
         }
     }
@@ -88,12 +85,12 @@ public class AnimationSystem implements ISystem, IEventListener {
     public void doAnimations() {
         animations.forEach((key, value) -> {
             if (value.getType() == AnimationInstruction.Type.Move) {
-                CScreenPosition cScreenPosition = (CScreenPosition) componentManager.getComponent(key, ComponentType.ScreenPosition);
-                moveAnimation(cScreenPosition, value);
+                ScreenPositionComponent screenPositionComponent = (ScreenPositionComponent) componentManager.getComponent(key, ComponentType.ScreenPosition);
+                moveAnimation(screenPositionComponent, value);
             } else if (value.getType() == AnimationInstruction.Type.Scale) {
-                CTexture cTexture = (CTexture) componentManager.getComponent(key, ComponentType.Texture);
-                CScreenPosition cScreenPosition = (CScreenPosition) componentManager.getComponent(key, ComponentType.ScreenPosition);
-                scaleAnimation(cTexture, cScreenPosition, value);
+                TextureComponent textureComponent = (TextureComponent) componentManager.getComponent(key, ComponentType.Texture);
+                ScreenPositionComponent screenPositionComponent = (ScreenPositionComponent) componentManager.getComponent(key, ComponentType.ScreenPosition);
+                scaleAnimation(textureComponent, screenPositionComponent, value);
             }
 
             if (value.isFinished() && value.getOnFinished() != null)

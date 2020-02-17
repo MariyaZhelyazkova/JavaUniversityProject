@@ -1,15 +1,15 @@
 package ECS.implementation.systems;
 
 import ECS.base.ComponentManager;
-import ECS.base.interfaceses.Entity;
+import ECS.base.Entity;
 import ECS.base.interfaceses.ISystem;
 import ECS.base.types.ComponentType;
 import ECS.base.types.EntityType;
 import ECS.base.types.SystemType;
 import ECS.implementation.components.BoardComponent;
-import ECS.implementation.components.CPosition;
-import ECS.implementation.components.CScreenPosition;
-import ECS.implementation.components.CTexture;
+import ECS.implementation.components.PositionComponent;
+import ECS.implementation.components.ScreenPositionComponent;
+import ECS.implementation.components.TextureComponent;
 import events.base.IEvent;
 import events.base.IEventListener;
 import events.implementation.CreateMissingEvent;
@@ -17,7 +17,7 @@ import events.implementation.EventDispatcher;
 import events.implementation.MoveEvent;
 import events.implementation.ScaleEvent;
 import events.types.EventType;
-import sandbox.Layer;
+import ECS.implementation.entity.Layer;
 
 import java.util.List;
 import java.util.Random;
@@ -46,11 +46,11 @@ public class PopulatingSystem implements ISystem, IEventListener {
 
         try {
             componentManager.registerEntity(entity);
-            componentManager.addComponent(entity, new CPosition(xPos, yPos));
-            componentManager.addComponent(entity, new CScreenPosition(
+            componentManager.addComponent(entity, new PositionComponent(xPos, yPos));
+            componentManager.addComponent(entity, new ScreenPositionComponent(
                     xPos * boardComponent.getEntitySze() + boardComponent.getPaddingLeft(),
                     yPos * boardComponent.getEntitySze() + boardComponent.getPaddingTop()));
-            componentManager.addComponent(entity, new CTexture(tileType, width, heigth));
+            componentManager.addComponent(entity, new TextureComponent(tileType, width, heigth));
 
             return entity;
         } catch (Exception e) {
@@ -70,10 +70,10 @@ public class PopulatingSystem implements ISystem, IEventListener {
 
     private Entity findEntityAt(int xPos, int yPos) {
         @SuppressWarnings("unchecked")
-        List<CPosition> components = (List<CPosition>) (List<?>) componentManager.getComponent(ComponentType.Position);
-        for (CPosition cPosition : components)
-            if (cPosition.getY() == yPos && cPosition.getX() == xPos)
-                return componentManager.getEntity(cPosition);
+        List<PositionComponent> components = (List<PositionComponent>) (List<?>) componentManager.getComponent(ComponentType.Position);
+        for (PositionComponent positionComponent : components)
+            if (positionComponent.getY() == yPos && positionComponent.getX() == xPos)
+                return componentManager.getEntity(positionComponent);
 
         return null;
     }

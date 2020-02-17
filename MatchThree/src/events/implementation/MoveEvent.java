@@ -1,8 +1,7 @@
 package events.implementation;
 
-import ECS.base.interfaceses.Entity;
+import ECS.base.Entity;
 import events.base.IEvent;
-import events.base.IInstructions;
 import events.types.EventType;
 
 public class MoveEvent implements IEvent {
@@ -50,11 +49,6 @@ public class MoveEvent implements IEvent {
 
     public void setHandled(boolean handled) {
         this.handled = handled;
-    }
-
-    @Override
-    public IInstructions getEventInstruction() {
-        return null;
     }
 
     @Override

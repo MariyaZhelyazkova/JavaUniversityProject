@@ -2,7 +2,6 @@ package ECS.base;
 
 import ECS.base.interfaceses.IComponent;
 import ECS.base.interfaceses.IComponentManager;
-import ECS.base.interfaceses.Entity;
 import ECS.base.types.ComponentType;
 import events.base.IEvent;
 import events.base.IEventListener;

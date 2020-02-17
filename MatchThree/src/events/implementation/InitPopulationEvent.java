@@ -1,8 +1,7 @@
 package events.implementation;
 
-import ECS.base.interfaceses.Entity;
+import ECS.base.Entity;
 import events.base.IEvent;
-import events.base.IInstructions;
 import events.types.EventType;
 
 public class InitPopulationEvent implements IEvent {
@@ -22,11 +21,6 @@ public class InitPopulationEvent implements IEvent {
     @Override
     public boolean isHandled() {
         return handled;
-    }
-
-    @Override
-    public IInstructions getEventInstruction() {
-        return null;
     }
 
     @Override
