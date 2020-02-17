@@ -1,5 +1,6 @@
-package ECS.base;
+package ECS.implementation;
 
+import ECS.base.Entity;
 import ECS.base.interfaceses.IComponent;
 import ECS.base.interfaceses.IComponentManager;
 import ECS.base.types.ComponentType;

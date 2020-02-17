@@ -1,6 +1,6 @@
 package sandbox;
 
-import ECS.base.ComponentManager;
+import ECS.implementation.ComponentManager;
 import ECS.base.types.ComponentType;
 import ECS.implementation.components.ScreenPositionComponent;
 import ECS.implementation.components.TextureComponent;

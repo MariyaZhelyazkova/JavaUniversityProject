@@ -1,6 +1,6 @@
 package sandbox;
 
-import ECS.base.ComponentManager;
+import ECS.implementation.ComponentManager;
 import ECS.base.Entity;
 import ECS.base.types.EntityType;
 import ECS.implementation.components.ControllerComponent;

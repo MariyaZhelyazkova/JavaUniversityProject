@@ -2,34 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0ad6260b-1906-4e59-bf01-f2236c9faa0c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/base/ComponentManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/base/ComponentManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/base/EntityCounter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/base/SystemManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/base/interfaceses/Entity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/base/Entity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/base/interfaceses/IComponentManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/base/interfaceses/IComponentManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/base/interfaceses/ISystemManager.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/implementation/components/CPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/implementation/components/PositionComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/implementation/components/CScreenPosition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/implementation/components/ScreenPositionComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/implementation/components/CTexture.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/implementation/components/TextureComponent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/implementation/entity/TileTypes.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ECS/base/ComponentManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/implementation/ComponentManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ECS/implementation/entity/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/implementation/entity/Layer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ECS/implementation/systems/AnimationSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/implementation/systems/AnimationSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ECS/implementation/systems/MatchingSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/implementation/systems/MatchingSystem.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ECS/implementation/systems/PopulatingSystem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/implementation/systems/PopulatingSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/implementation/systems/SMovement.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/implementation/systems/SRenderer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/implementation/systems/RendererSystem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ECS/implementation/systems/SWorld.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/base/IEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/base/IEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/implementation/ArrangeAntitiesEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/implementation/ArrangeAntitiesEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/implementation/ClickEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/implementation/ClickEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/implementation/CreateMissingEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/implementation/CreateMissingEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/implementation/EntityDestroyedEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/implementation/EntityDestroyedEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/implementation/InitPopulationEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/implementation/InitPopulationEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/implementation/MoveEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/implementation/MoveEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/implementation/ScaleEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/events/implementation/ScaleEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/events/implementation/instructions/AnimationInstruction.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ECS/implementation/systems/AnimationInstruction.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sandbox/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sandbox/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sandbox/Layer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sandbox/Layer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sandbox/MainThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sandbox/MainThread.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -131,7 +109,7 @@
       <workItem from="1581617280223" duration="4753000" />
       <workItem from="1581663982229" duration="23940000" />
       <workItem from="1581753566953" duration="36898000" />
-      <workItem from="1581925783438" duration="1663000" />
+      <workItem from="1581925783438" duration="2477000" />
     </task>
     <servers />
   </component>
