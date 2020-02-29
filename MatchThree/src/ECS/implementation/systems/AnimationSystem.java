@@ -3,7 +3,7 @@ package ECS.implementation.systems;
 import ECS.base.Entity;
 import ECS.base.interfaceses.SystemBase;
 import ECS.base.types.ComponentType;
-import ECS.implementation.ComponentManager;
+import ECS.base.interfaceses.ComponentManager;
 import ECS.implementation.components.PositionComponent;
 import ECS.implementation.components.ScreenPositionComponent;
 import ECS.implementation.components.TextureComponent;

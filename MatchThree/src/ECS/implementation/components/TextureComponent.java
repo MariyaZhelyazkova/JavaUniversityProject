@@ -1,6 +1,6 @@
 package ECS.implementation.components;
 
-import ECS.base.interfaceses.IComponent;
+import ECS.base.interfaceses.ComponentBase;
 import ECS.base.types.ComponentType;
 
 import javax.imageio.ImageIO;
@@ -8,13 +8,13 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 
-public class TextureComponent implements IComponent {
-    private final ComponentType componentType = ComponentType.Texture;
+public class TextureComponent extends ComponentBase {
     private final String imageName;
     private BufferedImage texture;
     private int height, width;
 
     public TextureComponent(String imageName, int width, int height) throws Exception {
+        super(ComponentType.Texture);
         if (!imageName.isBlank()) {
             this.imageName = imageName;
             this.width = width;
@@ -39,7 +39,7 @@ public class TextureComponent implements IComponent {
         try {
             ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
             texture = ImageIO.read(classLoader.getResourceAsStream(imageName));
-            texture =  resize(texture, width, height);
+            texture = resize(texture, width, height);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,10 +68,4 @@ public class TextureComponent implements IComponent {
     public void recalculateTexture() {
         loadImage();
     }
-
-    @Override
-    public ComponentType getComponentType() {
-        return componentType;
-    }
-
 }

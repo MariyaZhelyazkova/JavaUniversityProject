@@ -1,11 +1,10 @@
 package ECS.implementation.components;
 
+import ECS.base.interfaceses.ComponentBase;
 import ECS.base.interfaceses.IComponent;
 import ECS.base.types.ComponentType;
 
-public class PositionComponent implements IComponent {
-    private final ComponentType componentType = ComponentType.Position;
-
+public class PositionComponent extends ComponentBase {
     private int x, y;
 
     public int getX() {
@@ -25,12 +24,8 @@ public class PositionComponent implements IComponent {
     }
 
     public PositionComponent(int x, int y) {
+        super(ComponentType.Position);
         this.x = x;
         this.y = y;
-    }
-
-    @Override
-    public ComponentType getComponentType() {
-        return componentType;
     }
 }
