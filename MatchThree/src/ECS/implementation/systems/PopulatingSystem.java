@@ -40,12 +40,13 @@ public class PopulatingSystem extends SystemBase implements IEventListener {
         Entity entity = new Entity(tileType);
 
         try {
-            componentManager.registerEntity(entity);
-            componentManager.addComponent(entity, new PositionComponent(xPos, yPos));
-            componentManager.addComponent(entity, new ScreenPositionComponent(
-                    xPos * boardComponent.getEntitySze() + boardComponent.getPaddingLeft(),
-                    yPos * boardComponent.getEntitySze() + boardComponent.getPaddingTop()));
-            componentManager.addComponent(entity, new TextureComponent(tileType, width, heigth));
+            componentManager.registerEntity(entity,
+                    new PositionComponent(xPos, yPos),
+                    new ScreenPositionComponent(
+                            xPos * boardComponent.getEntitySze() + boardComponent.getPaddingLeft(),
+                            yPos * boardComponent.getEntitySze() + boardComponent.getPaddingTop()),
+                    new TextureComponent(tileType, width, heigth)
+                    );
 
             return entity;
         } catch (Exception e) {

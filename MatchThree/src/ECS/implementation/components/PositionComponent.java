@@ -1,7 +1,6 @@
 package ECS.implementation.components;
 
 import ECS.base.interfaceses.ComponentBase;
-import ECS.base.interfaceses.IComponent;
 import ECS.base.types.ComponentType;
 
 public class PositionComponent extends ComponentBase {

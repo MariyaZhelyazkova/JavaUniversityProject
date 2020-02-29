@@ -66,7 +66,7 @@ public final class ComponentManager implements IEventListener {
 
     public Entity getEntity(ComponentBase componentBase) {
         for (HashMap.Entry entry : components.entrySet()) {
-            if (((List<IComponent>) entry.getValue()).contains(componentBase))
+            if (((List<ComponentBase>) entry.getValue()).contains(componentBase))
                 return (Entity) entry.getKey();
         }
 
