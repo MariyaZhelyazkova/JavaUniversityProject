@@ -1,28 +1,27 @@
 package ECS.implementation.systems;
 
-import ECS.implementation.ComponentManager;
 import ECS.base.Entity;
-import ECS.base.interfaceses.ISystem;
+import ECS.base.interfaceses.SystemBase;
 import ECS.base.types.ComponentType;
-import ECS.base.types.SystemType;
+import ECS.implementation.ComponentManager;
 import ECS.implementation.components.PositionComponent;
 import events.base.IEvent;
 import events.base.IEventListener;
-import events.implementation.*;
+import events.implementation.ClickEvent;
+import events.implementation.EntityDestroyedEvent;
+import events.implementation.EventDispatcher;
+import events.implementation.ScaleEvent;
 import events.types.EventType;
 
 import java.util.List;
 import java.util.Vector;
 
-public class MatchingSystem implements ISystem, IEventListener {
-    private final SystemType systemType = SystemType.Matching;
+public class MatchingSystem extends SystemBase implements IEventListener {
     private final ComponentManager componentManager;
     private final EventDispatcher eventDispatcher;
-    private final Vector<ComponentType> requiredComponent = new Vector<ComponentType>() {{
-        add(ComponentType.Position);
-    }};
 
     public MatchingSystem(ComponentManager componentManager, EventDispatcher eventDispatcher) {
+        super(ComponentType.Position);
         this.componentManager = componentManager;
         this.eventDispatcher = eventDispatcher;
     }
@@ -71,16 +70,6 @@ public class MatchingSystem implements ISystem, IEventListener {
     private void destroyEntities(List<Entity> destroyEntities) {
         for (Entity entity : destroyEntities)
             eventDispatcher.publish(new ScaleEvent(-4, entity, 2, 2, new EntityDestroyedEvent(entity)));
-    }
-
-    @Override
-    public SystemType getSystemType() {
-        return systemType;
-    }
-
-    @Override
-    public Vector<ComponentType> getRequiredComponents() {
-        return requiredComponent;
     }
 
     @Override

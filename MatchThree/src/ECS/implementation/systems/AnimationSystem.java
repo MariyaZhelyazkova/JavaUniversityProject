@@ -1,10 +1,9 @@
 package ECS.implementation.systems;
 
-import ECS.implementation.ComponentManager;
 import ECS.base.Entity;
-import ECS.base.interfaceses.ISystem;
+import ECS.base.interfaceses.SystemBase;
 import ECS.base.types.ComponentType;
-import ECS.base.types.SystemType;
+import ECS.implementation.ComponentManager;
 import ECS.implementation.components.PositionComponent;
 import ECS.implementation.components.ScreenPositionComponent;
 import ECS.implementation.components.TextureComponent;
@@ -17,19 +16,14 @@ import events.types.EventType;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Vector;
 
-public class AnimationSystem implements ISystem, IEventListener {
-    private final SystemType systemType = SystemType.Animation;
+public class AnimationSystem extends SystemBase implements IEventListener {
     private final EventDispatcher eventDispatcher;
     private final ComponentManager componentManager;
-    private final Vector<ComponentType> requiredComponent = new Vector<ComponentType>() {{
-        add(ComponentType.Position);
-    }};
     private Map<Entity, AnimationInstruction> animations = new HashMap<>();
-    private Map<EventType, IEvent> onFinishedEvents = new HashMap<>();
 
     public AnimationSystem(EventDispatcher eventDispatcher, ComponentManager componentManager) {
+        super(ComponentType.Position);
         this.eventDispatcher = eventDispatcher;
         this.componentManager = componentManager;
     }
@@ -71,7 +65,7 @@ public class AnimationSystem implements ISystem, IEventListener {
 //            cScreenPosition.setX(cScreenPosition.getX() - value.getStep() /2);
 
             if ((value.getStep() > 0 && textureComponent.getHeight() >= value.getY() && textureComponent.getWidth() >= value.getX()) ||
-            ((value.getStep() < 0 && textureComponent.getHeight() <= value.getY() && textureComponent.getWidth() <= value.getX()))) {
+                    ((value.getStep() < 0 && textureComponent.getHeight() <= value.getY() && textureComponent.getWidth() <= value.getX()))) {
                 value.setFinished(true);
                 textureComponent.setHeight(value.getY());
                 textureComponent.setWidth(value.getX());
@@ -105,16 +99,6 @@ public class AnimationSystem implements ISystem, IEventListener {
 
     public boolean hasAnimations() {
         return animations.size() > 0;
-    }
-
-    @Override
-    public SystemType getSystemType() {
-        return systemType;
-    }
-
-    @Override
-    public Vector<ComponentType> getRequiredComponents() {
-        return requiredComponent;
     }
 
     @Override

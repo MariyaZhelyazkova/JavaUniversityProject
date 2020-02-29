@@ -1,15 +1,15 @@
 package ECS.implementation.systems;
 
-import ECS.implementation.ComponentManager;
 import ECS.base.Entity;
-import ECS.base.interfaceses.ISystem;
+import ECS.base.interfaceses.SystemBase;
 import ECS.base.types.ComponentType;
 import ECS.base.types.EntityType;
-import ECS.base.types.SystemType;
+import ECS.implementation.ComponentManager;
 import ECS.implementation.components.BoardComponent;
 import ECS.implementation.components.PositionComponent;
 import ECS.implementation.components.ScreenPositionComponent;
 import ECS.implementation.components.TextureComponent;
+import ECS.implementation.entity.Layer;
 import events.base.IEvent;
 import events.base.IEventListener;
 import events.implementation.CreateMissingEvent;
@@ -17,22 +17,17 @@ import events.implementation.EventDispatcher;
 import events.implementation.MoveEvent;
 import events.implementation.ScaleEvent;
 import events.types.EventType;
-import ECS.implementation.entity.Layer;
 
 import java.util.List;
 import java.util.Random;
-import java.util.Vector;
 
-public class PopulatingSystem implements ISystem, IEventListener {
-    private final SystemType systemType = SystemType.Population;
-    private final Vector<ComponentType> requiredComponents = new Vector<ComponentType>() {{
-        add(ComponentType.Position);
-    }};
+public class PopulatingSystem extends SystemBase implements IEventListener {
     private final EventDispatcher eventDispatcher;
     private final ComponentManager componentManager;
     private BoardComponent boardComponent;
 
     public PopulatingSystem(EventDispatcher eventDispatcher, ComponentManager componentManager) {
+        super(ComponentType.Position);
         this.eventDispatcher = eventDispatcher;
         this.componentManager = componentManager;
     }
@@ -94,7 +89,7 @@ public class PopulatingSystem implements ISystem, IEventListener {
         int events = 0;
         for (int x = 0; x < boardComponent.getXSize(); x++) {
             int stepY = 0;
-            for (int y = boardComponent.getySize() -1; y >= 0; y--) {
+            for (int y = boardComponent.getySize() - 1; y >= 0; y--) {
                 Entity entity = findEntityAt(x, y);
                 if (entity == null)
                     stepY++;
@@ -107,16 +102,6 @@ public class PopulatingSystem implements ISystem, IEventListener {
 
         if (events == 0)
             eventDispatcher.publish(new CreateMissingEvent());
-    }
-
-    @Override
-    public SystemType getSystemType() {
-        return systemType;
-    }
-
-    @Override
-    public Vector<ComponentType> getRequiredComponents() {
-        return requiredComponents;
     }
 
     @Override

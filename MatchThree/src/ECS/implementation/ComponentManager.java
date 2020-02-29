@@ -11,6 +11,7 @@ import events.implementation.EventDispatcher;
 import events.types.EventType;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Vector;
 
 public class ComponentManager implements IComponentManager, IEventListener {
@@ -87,14 +88,14 @@ public class ComponentManager implements IComponentManager, IEventListener {
     @Override
     public Entity getEntity(IComponent iComponent) {
         for(HashMap.Entry entry : components.entrySet()){
-            if (((Vector<IComponent>) entry.getValue()).contains(iComponent))
+            if (((List<IComponent>) entry.getValue()).contains(iComponent))
                 return (Entity) entry.getKey();
         }
 
         return null;
     }
 
-    public boolean entityHasComponents(Entity entity, Vector<ComponentType> reqComponents){
+    public boolean entityHasComponents(Entity entity, List<ComponentType> reqComponents){
         Vector<ComponentType> componentTypes = getComponentsType(entity);
         for (ComponentType ct : reqComponents) {
             if (!componentTypes.contains(ct))
